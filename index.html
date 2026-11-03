@@ -229,6 +229,7 @@ function updateFixedFields(root){
 redrawFixedEditor=function(root){originalRedrawFixed(root);updateFixedFields(root);};
 document.addEventListener('input',function(e){
   if(e.target.matches('[data-fixed-amount]')){
+    markDrawerDirty();
     e.stopPropagation();
     const row=e.target.closest('[data-fixed-id]');
     const entry=fixedEntries.find(x=>x.id===Number(row?.dataset.fixedId));
