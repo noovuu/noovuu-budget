@@ -452,3 +452,33 @@ main .profile-banner button:hover { background: var(--color-button-primary-white
 @media (prefers-reduced-motion: reduce) {
   #cards > article.city.panel { transition: none; }
 }
+
+
+/* Noovuu original vector logo: fixed 64px square in every viewport.
+   Keep brand link semantics and click-to-home behavior intact. */
+#noovuu-nav #noovuu-brand.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 64px;
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  padding: 0;
+  margin-right: var(--spacing-2);
+  line-height: 0;
+}
+#noovuu-nav #noovuu-brand.nav-logo img {
+  display: block;
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  object-fit: contain;
+  flex: 0 0 64px;
+}
