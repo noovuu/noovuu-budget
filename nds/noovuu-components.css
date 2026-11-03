@@ -1,0 +1,109 @@
+/*
+ * Noovuu integration of NDS component styling.
+ * Source tokens: nds-tokens.css (read-only extraction from Figma).
+ * No changes are made to the NDS Figma design system.
+ * This adapter is intentionally independent of the calculator and drawer JavaScript.
+ */
+:root {
+  --noovuu-page: var(--color-surface-page);
+  --noovuu-surface: var(--color-surface-default);
+  --noovuu-subtle: var(--color-surface-panel);
+  --noovuu-content: var(--color-text-primary);
+  --noovuu-muted: var(--color-text-secondary);
+  --noovuu-border: var(--color-border-200, #e0e0e0);
+  --noovuu-control-border: var(--color-border-field-enabled, #d4d4d4);
+  --noovuu-focus: var(--color-surface-control-selected, #3b82f6);
+}
+html { font-family: var(--font-sans), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body { background: var(--noovuu-page); color: var(--noovuu-content); }
+button,input,select,textarea { font-family: inherit; }
+main { color: var(--noovuu-content); }
+h1,.city-title,.wz-card h1 { font-family: var(--font-display), var(--font-sans), sans-serif; }
+.heading h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
+p,.muted,.wz-intro,.fx-controls,.fx-rate { color: var(--noovuu-muted); }
+.panel,.wz-card,.fixed-modal,.noovuu-confirm-panel {
+  background: var(--noovuu-surface);
+  border-color: var(--noovuu-border);
+  border-radius: var(--radius-xl);
+}
+.panel { padding: var(--spacing-6); }
+.city,.stat,.fixed-edit-card { border-radius: var(--radius-lg); }
+.stat,.fixed-edit-card { background: var(--noovuu-subtle); }
+.wz-field label,.wz-label,.input-head,.expense-title { color: var(--noovuu-content); }
+.wz-field input,.wz-field select,.wz-field textarea,
+.expense input,.fixed-entry input,#noovuu-nav select {
+  color: var(--noovuu-content);
+  background: var(--color-surface-field-enabled);
+  border: var(--border-width-1) solid var(--noovuu-control-border);
+  border-radius: var(--radius-md);
+}
+:is(.wz-field input,.wz-field select,.wz-field textarea,.expense input,.fixed-entry input,#noovuu-nav select):hover {
+  border-color: var(--color-border-field-hover, var(--noovuu-control-border));
+}
+:is(.wz-field input,.wz-field select,.wz-field textarea,.expense input,.fixed-entry input,#noovuu-nav select):focus-visible,
+:is(.wz-btn,.wz-choice,.nav-action,.fixed-link,.more,.reset,.drawer-cancel,#noovuu-close,#noovuu-confirm button):focus-visible {
+  outline: 2px solid var(--noovuu-focus);
+  outline-offset: 2px;
+}
+.wz-btn {
+  color: var(--color-button-primary-black-content);
+  background: var(--color-button-primary-black-bg);
+  border-radius: var(--radius-lg);
+  font-weight: var(--weight-semibold);
+}
+.wz-btn:hover:not(:disabled) { background: var(--color-button-primary-black-bg-hover); }
+.wz-btn:active:not(:disabled) { background: var(--color-button-primary-black-bg-active); }
+.wz-btn.secondary {
+  color: var(--color-button-primary-white-content);
+  background: var(--color-button-primary-white-bg);
+  border-color: var(--noovuu-border);
+}
+.wz-btn.secondary:hover:not(:disabled) { background: var(--color-button-primary-white-bg-hover); }
+.wz-btn:disabled {
+  opacity: 1;
+  color: var(--color-button-primary-black-content-disabled);
+  background: var(--color-button-primary-black-bg-disabled);
+}
+.wz-choice,.more,.reset,.fixed-link,.drawer-cancel,
+#noovuu-close,#noovuu-confirm button:not(#noovuu-discard) {
+  border-color: var(--noovuu-border);
+  border-radius: var(--radius-md);
+  color: var(--color-button-primary-white-content);
+  background: var(--color-button-primary-white-bg);
+}
+.wz-choice:hover,.more:hover,.reset:hover,.fixed-link:hover,
+#onboarding .noovuu-drawer-head .drawer-cancel:hover {
+  background: var(--color-button-primary-white-bg-hover);
+}
+.wz-choice.selected { background: var(--color-surface-interactive-selected); border-color: var(--color-border-interactive-selected); color: var(--noovuu-content); }
+#noovuu-nav {
+  background: var(--color-surface-raised);
+  border-color: var(--noovuu-border);
+  font-family: var(--font-sans), sans-serif;
+}
+#noovuu-nav .nav-logo { color: var(--noovuu-content); }
+#noovuu-nav .nav-action { color: var(--color-button-tertiary-content-default); }
+#noovuu-nav .nav-action:hover { background: var(--color-surface-nav-hover); }
+#noovuu-nav .nav-action[aria-current=page] {
+  color: var(--noovuu-content);
+  background: var(--color-surface-nav-selected);
+}
+#onboarding { background: var(--noovuu-page); }
+#onboarding .noovuu-drawer-head {
+  background: var(--noovuu-page);
+  border-color: var(--noovuu-border);
+}
+#onboarding .noovuu-drawer-head strong { color: var(--noovuu-content); }
+#noovuu-scrim { background: var(--color-surface-scrim); }
+#noovuu-confirm { background: var(--color-surface-scrim); }
+#noovuu-confirm .noovuu-confirm-panel {
+  background: var(--noovuu-surface);
+  border-color: var(--noovuu-border);
+}
+#noovuu-confirm h2 { color: var(--noovuu-content); }
+#noovuu-confirm #noovuu-discard { background: var(--color-button-primary-destructive-bg, #b70b0b); }
+input[type=range] { accent-color: var(--color-surface-control-selected); }
+@media (max-width: 649px) {
+  .panel { padding: var(--spacing-4); }
+  .heading h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
+}
