@@ -68,6 +68,23 @@ body.noovuu-drawer-open #onboarding{transform:translateX(0);visibility:visible;p
 @media(max-width:490px){body{padding-top:112px}#noovuu-nav{min-height:105px;height:auto;padding:7px 11px;flex-wrap:wrap;align-content:center;row-gap:2px}#noovuu-nav .nav-left{width:100%;justify-content:space-between}#noovuu-nav .nav-right{width:100%;justify-content:flex-end}#noovuu-nav .nav-action{padding:5px 7px}#noovuu-nav select{height:30px}#onboarding{padding:0 12px 40px}#onboarding .wz-card{padding:17px}}
 @media(prefers-reduced-motion:reduce){#onboarding,#noovuu-scrim{transition:none}}
 
+
+/* Drawer cancellation: require explicit discard confirmation after an edit. */
+#onboarding .noovuu-drawer-head .drawer-head-actions{display:flex;align-items:center;gap:9px}
+#onboarding .noovuu-drawer-head .drawer-cancel{border:1px solid #d4dce4;border-radius:10px;background:white;color:#455768;font-size:13px;font-weight:680;padding:11px 13px;cursor:pointer}
+#noovuu-unsaved{font-size:11px;color:#a4472c;font-weight:700;white-space:nowrap}
+#noovuu-unsaved[hidden]{display:none}
+#noovuu-confirm[hidden]{display:none!important}
+#noovuu-confirm{position:fixed;inset:0;z-index:1400;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.67);padding:18px}
+#noovuu-confirm .noovuu-confirm-panel{width:min(430px,100%);padding:25px;background:white;border:1px solid #dce4e9;border-radius:17px;box-shadow:0 20px 70px rgba(9,26,40,.25)}
+#noovuu-confirm h2{font-size:21px;margin:0 0 11px;color:#1b2e3d}
+#noovuu-confirm p{font-size:14px;margin:0;color:#617280;line-height:1.55}
+#noovuu-confirm .noovuu-confirm-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:25px;flex-wrap:wrap}
+#noovuu-confirm button{font-size:13px;font-weight:710;border-radius:10px;padding:11px 14px;border:1px solid #d4dce4;background:#fff;color:#344b5d;cursor:pointer}
+#noovuu-confirm #noovuu-discard{background:#9f373c;color:#fff;border-color:#9f373c}
+#noovuu-confirm button:focus-visible,#onboarding .drawer-cancel:focus-visible{outline:3px solid #86bda7;outline-offset:2px}
+@media(max-width:480px){#onboarding .noovuu-drawer-head .drawer-head-actions{gap:5px}#onboarding .noovuu-drawer-head .drawer-cancel{padding:10px 9px}#noovuu-confirm .noovuu-confirm-panel{padding:20px}}
+
 </style></head><body class="wizard-active"><section id="onboarding" aria-label="Lifestyle onboarding"><div class="wz-top"><div class="wz-identity"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">Your lifestyle, translated into numbers · Live update test ✓</span></div><div class="wz-card"><div class="wz-eyebrow" id="wz-counter">Step 1 of 7</div><div class="wz-progress"><div id="wz-bar"></div></div><div id="wz-content"></div><div class="wz-actions"><button id="wz-back" class="wz-btn secondary" type="button">Back</button><button id="wz-next" class="wz-btn" type="button">Continue →</button></div></div><div class="wz-disclaimer">Prototype only. Your answers are saved on this device, not sent to a service. The city prices and inferred estimates remain illustrative, and should not be mistaken for researched local retail prices.</div></section><main><header><div class="brand"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">Responsive prototype · Dual currency · GitHub sync verified ✓</span></header><div class="heading"><div><h1>What would your life cost?</h1><p>Compare your money across cities using the same housing budget, location-independent fixed expenses and your own spending choices.</p></div></div><section class="panel" style="margin-top:20px"><div class="inputs"><div><div class="input-head"><label for="income">Monthly take-home pay</label><strong id="incomeValue">C$8,000</strong></div><div id="incomeFx" class="fx-controls" aria-live="polite"></div><input id="income" type="range" min="2000" max="16000" value="8000" step="250"><div class="smallrow"><span>C$2,000</span><span>C$16,000</span></div></div><div><div class="input-head"><label for="rent">Monthly Airbnb budget</label><strong id="rentValue">C$1,800</strong></div><div id="rentFx" class="fx-controls" aria-live="polite"></div><input id="rent" type="range" min="500" max="4000" value="1800" step="50"><div class="smallrow"><span>C$500</span><span>C$4,000</span></div></div><div><div class="input-head"><label for="fixed">Fixed Monthly Expenses</label><strong id="fixedValue">C$1,000</strong></div><div id="fixedFx" class="fx-controls" aria-live="polite"></div><input id="fixed" type="range" min="0" max="5000" value="1000" step="50"><div class="smallrow"><span>C$0</span><span>C$5,000</span></div><div class="fx-controls">Insurance, subscriptions and recurring payments that remain the same in every city. Do not include these again under Entertainment &amp; other.</div><button class="fixed-link" type="button" id="openFixedEditor">Itemize fixed expenses ↗</button><div class="fx-controls">Slider changes are quick estimates; your saved itemized amounts are preserved until you edit them.</div></div></div></section><div class="profile-banner"><div><strong id="profileHeadline">Your lifestyle profile</strong><div class="sub" id="profileDetail">Personalized assumptions based on onboarding</div></div><button id="editProfile" type="button">Edit lifestyle profile</button></div><div class="toolbar"><div class="toggle" role="group" aria-label="View type"><button id="quick" class="active" aria-pressed="true">Quick View</button><button id="advanced" aria-pressed="false">Advanced View</button></div><div class="controls"><button class="more" id="add">+ Add / change cities (max 4)</button><button class="reset" id="reset">Reset figures</button></div></div><div class="selection" id="selector" hidden></div><section id="cards" class="layout" aria-label="City comparison"></section><div class="city-dots" id="dots"></div><div class="swipe-note">Swipe sideways to explore your cities →</div><p class="note">New city starting estimates (Bucaramanga, Arequipa, Cuenca, Córdoba) are illustrative placeholders, not sourced local price observations. All living-cost values are illustrative assumptions, not verified live city prices. Your income, housing and fixed-cost figures are personal inputs; a future production version should label data sources, price dates and confidence levels. Housing is held equal across cities for comparison and does not imply Airbnb availability at that price. Values are saved locally in this browser. Exchange rates are dated reference rates, not a live price feed; provider spreads and fees are not included.</p></main><script>
 const defaults={"Barranquilla":{country:"Colombia",groceries:400,restaurants:400,transport:200,mobile:35,gym:65,other:250},"Quito":{country:"Ecuador",groceries:350,restaurants:350,transport:150,mobile:35,gym:90,other:200},"Medellín":{country:"Colombia",groceries:450,restaurants:500,transport:250,mobile:40,gym:80,other:380},"Mexico City":{country:"Mexico",groceries:450,restaurants:450,transport:250,mobile:40,gym:80,other:300},"Córdoba":{country:"Mexico · Veracruz",groceries:340,restaurants:300,transport:160,mobile:35,gym:65,other:200},"Bucaramanga":{country:"Colombia",groceries:350,restaurants:350,transport:170,mobile:35,gym:65,other:220},"Arequipa":{country:"Peru",groceries:310,restaurants:310,transport:125,mobile:30,gym:65,other:200},"Cuenca":{country:"Ecuador",groceries:330,restaurants:320,transport:130,mobile:35,gym:75,other:200}};
 const fxRates={COP:{rate:2264.01,date:'Oct 23, 2026 · 11:19 UTC'},USD:{rate:0.715035,date:'Oct 23, 2026 · 14:36 UTC'},MXN:{rate:13.3408,date:'Oct 23, 2026 · 14:37 UTC'},PEN:{rate:2.45321,date:'Oct 23, 2026 · 11:19 UTC'}};
@@ -143,7 +160,7 @@ const nav=document.createElement('nav');nav.id='noovuu-nav';nav.setAttribute('ar
 nav.innerHTML='<div class="nav-left"><a href="/" class="nav-logo" id="noovuu-brand">noovuu</a><a class="nav-action" id="noovuu-home" href="/" aria-current="page">⌂ Home</a><a class="nav-action" id="noovuu-builder" href="#budget-builder">▣ Budget Builder</a></div><div class="nav-right"><label class="nav-field"><span>Translate</span><select id="noovuu-translate" aria-label="Translate pages with Google Translate"><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select></label><label class="nav-field"><span>Currency</span><select id="noovuu-currency" aria-label="Default calculator currency"><option>CAD</option><option>USD</option><option>MXN</option><option>COP</option><option>PEN</option></select></label></div>';
 document.body.insertBefore(nav,document.body.firstChild);
 const scrim=document.createElement('button');scrim.id='noovuu-scrim';scrim.type='button';scrim.setAttribute('aria-label','Close Budget Builder');document.body.insertBefore(scrim,onboarding);
-const heading=document.createElement('div');heading.className='noovuu-drawer-head';heading.innerHTML='<div><small>Noovuu workspace</small><strong>Budget Builder</strong></div><button id="noovuu-close" type="button" aria-label="Close Budget Builder">×</button>';onboarding.insertBefore(heading,onboarding.firstChild);
+const heading=document.createElement('div');heading.className='noovuu-drawer-head';heading.innerHTML='<div><small>Noovuu workspace</small><strong>Budget Builder</strong></div><div class="drawer-head-actions"><span id="noovuu-unsaved" role="status" hidden>Unsaved changes</span><button class="drawer-cancel" id="noovuu-cancel" type="button">Cancel</button><button id="noovuu-close" type="button" aria-label="Close Budget Builder">×</button></div>';onboarding.insertBefore(heading,onboarding.firstChild);
 onboarding.setAttribute('role','dialog');onboarding.setAttribute('aria-label','Budget Builder');onboarding.setAttribute('aria-modal','true');
 const currentRate=()=>preferred==='CAD'?1:fxRates[preferred].rate;
 const displayValue=cad=>(Number(cad)||0)*currentRate();
@@ -258,18 +275,113 @@ function setCurrency(next){
 nav.querySelector('#noovuu-currency').addEventListener('change',e=>setCurrency(e.target.value));
 nav.querySelector('#noovuu-currency').value=preferred;
 
-function closeDrawer(changeAddress=true){
+// Treat every drawer opening as an editing transaction. Existing inline persistence
+// remains compatible, but Cancel/Discard rolls all touched values back atomically.
+let drawerDirty=false;
+let drawerSnapshot=null;
+let confirmReturnFocus=null;
+const discardDialog=document.createElement('div');
+discardDialog.id='noovuu-confirm';
+discardDialog.hidden=true;
+discardDialog.innerHTML='<section class="noovuu-confirm-panel" role="alertdialog" aria-modal="true" aria-labelledby="noovuu-confirm-title" aria-describedby="noovuu-confirm-description"><h2 id="noovuu-confirm-title">Discard your changes?</h2><p id="noovuu-confirm-description">Changes made since opening Budget Builder will be lost. Your previously saved values will be restored.</p><div class="noovuu-confirm-actions"><button type="button" id="noovuu-keep">Keep editing</button><button type="button" id="noovuu-discard">Discard changes</button></div></section>';
+document.body.appendChild(discardDialog);
+const capturedKeys=[storeKey,profileKey,fixedListKey,currencyKey];
+function snapshotDrawer(){
+  const persisted={};
+  for(const key of capturedKeys){
+    try{persisted[key]=localStorage.getItem(key);}catch(e){persisted[key]=null;}
+  }
+  return {
+    profile:structuredClone(profile),
+    state:structuredClone(state),
+    entries:structuredClone(fixedEntries),
+    nextId:fixedNextId,
+    estimateOverride:fixedEstimateOverride,
+    preferred:preferred,
+    step:wzStep,
+    persisted:persisted
+  };
+}
+function markDrawerDirty(){
+  if(!isOpen||drawerDirty)return;
+  drawerDirty=true;
+  const marker=onboarding.querySelector('#noovuu-unsaved');
+  if(marker)marker.hidden=false;
+}
+onboarding.addEventListener('input',e=>{
+  if(e.target.matches('[data-p],[data-fixed-name],[data-fixed-amount]'))markDrawerDirty();
+},true);
+onboarding.addEventListener('change',e=>{
+  if(e.target.matches('[data-p],[data-fixed-name],[data-fixed-amount]'))markDrawerDirty();
+},true);
+onboarding.addEventListener('click',e=>{
+  if(e.target.closest('[data-fixed-add],[data-fixed-remove]'))markDrawerDirty();
+},true);
+function restoreDrawerSnapshot(){
+  if(!drawerSnapshot)return;
+  profile=structuredClone(drawerSnapshot.profile);
+  Object.assign(state,structuredClone(drawerSnapshot.state));
+  fixedEntries=structuredClone(drawerSnapshot.entries);
+  fixedNextId=drawerSnapshot.nextId;
+  fixedEstimateOverride=drawerSnapshot.estimateOverride;
+  preferred=drawerSnapshot.preferred;
+  window.NoovuuCurrency=preferred;
+  nav.querySelector('#noovuu-currency').value=preferred;
+  wzStep=drawerSnapshot.step;
+  const title=document.getElementById('profileHeadline');
+  const detail=document.getElementById('profileDetail');
+  if(title)title.textContent=profile.finished?((profile.name?profile.name+'’s':'Your')+' lifestyle profile · '+profile.diet+' · '+profile.housingType):'Your lifestyle profile';
+  if(detail)detail.textContent=profile.finished?(profile.homeMeals+'% meals at home · '+profile.mobility+' mobility · '+profile.training+' training · '+profile.party+' traveler(s) · Editable city expenses below'):'Personalized assumptions based on onboarding';
+  const fixedModal=document.getElementById('fixedModalRoot');
+  if(fixedModal)fixedModal.innerHTML='';
+  render();
+  for(const key of capturedKeys){
+    try{
+      const saved=drawerSnapshot.persisted[key];
+      if(saved===null)localStorage.removeItem(key);
+      else localStorage.setItem(key,saved);
+    }catch(e){}
+  }
+}
+function closeDiscardDialog(){
+  if(discardDialog.hidden)return;
+  discardDialog.hidden=true;
+  onboarding.inert=false;
+  if(confirmReturnFocus?.isConnected)confirmReturnFocus.focus();
+  confirmReturnFocus=null;
+}
+function showDiscardDialog(){
+  if(!isOpen||!drawerDirty||!discardDialog.hidden)return;
+  confirmReturnFocus=document.activeElement;
+  onboarding.inert=true;
+  discardDialog.hidden=false;
+  discardDialog.querySelector('#noovuu-keep').focus();
+}
+function finishClose(changeAddress=true){
   if(!isOpen)return;
-  isOpen=false;document.body.classList.remove('noovuu-drawer-open','wizard-active');
+  isOpen=false;drawerDirty=false;drawerSnapshot=null;
+  onboarding.querySelector('#noovuu-unsaved').hidden=true;
+  document.body.classList.remove('noovuu-drawer-open','wizard-active');
   onboarding.setAttribute('aria-hidden','true');onboarding.inert=true;
   nav.querySelector('#noovuu-home').setAttribute('aria-current','page');
   nav.querySelector('#noovuu-builder').removeAttribute('aria-current');
   if(changeAddress&&location.hash==='#budget-builder')history.replaceState(null,'',location.pathname+location.search);
   if(lastFocused?.isConnected)lastFocused.focus();
 }
+function requestDrawerClose(source,changeAddress=true){
+  if(!isOpen)return;
+  if(drawerDirty){
+    // Scrim, navigation and Escape may not dismiss an edited form.
+    if(source==='cancel'||source==='close-button')showDiscardDialog();
+    return;
+  }
+  finishClose(changeAddress);
+}
 function openDrawer(changeAddress=true){
   if(isOpen)return;
   lastFocused=document.activeElement;isOpen=true;
+  drawerSnapshot=snapshotDrawer();drawerDirty=false;
+  onboarding.querySelector('#noovuu-unsaved').hidden=true;
   onboarding.inert=false;onboarding.setAttribute('aria-hidden','false');
   document.body.classList.add('noovuu-drawer-open');
   nav.querySelector('#noovuu-home').removeAttribute('aria-current');
@@ -277,18 +389,51 @@ function openDrawer(changeAddress=true){
   if(changeAddress&&location.hash!=='#budget-builder')history.replaceState(null,'',location.pathname+location.search+'#budget-builder');
   renderWizard();onboarding.querySelector('#noovuu-close').focus();
 }
-function showHome(e){if(e)e.preventDefault();closeDrawer();window.scrollTo({top:0,behavior:'smooth'});}
+discardDialog.querySelector('#noovuu-keep').addEventListener('click',closeDiscardDialog);
+discardDialog.querySelector('#noovuu-discard').addEventListener('click',()=>{
+  restoreDrawerSnapshot();
+  closeDiscardDialog();
+  finishClose();
+});
+document.addEventListener('keydown',e=>{
+  if(discardDialog.hidden)return;
+  if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeDiscardDialog();return;}
+  if(e.key!=='Tab')return;
+  const first=discardDialog.querySelector('#noovuu-keep');
+  const last=discardDialog.querySelector('#noovuu-discard');
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  e.stopImmediatePropagation();
+},true);
+function showHome(e){
+  if(e)e.preventDefault();
+  if(isOpen&&drawerDirty)return;
+  requestDrawerClose('navigation');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 nav.querySelector('#noovuu-home').addEventListener('click',showHome);
 nav.querySelector('#noovuu-brand').addEventListener('click',showHome);
 nav.querySelector('#noovuu-builder').addEventListener('click',e=>{e.preventDefault();openDrawer();});
-onboarding.querySelector('#noovuu-close').addEventListener('click',()=>closeDrawer());
-scrim.addEventListener('click',()=>closeDrawer());
+onboarding.querySelector('#noovuu-close').addEventListener('click',()=>requestDrawerClose('close-button'));
+onboarding.querySelector('#noovuu-cancel').addEventListener('click',()=>requestDrawerClose('cancel'));
+scrim.addEventListener('click',()=>requestDrawerClose('scrim'));
 document.getElementById('editProfile').addEventListener('click',()=>openDrawer());
-document.getElementById('wz-next').addEventListener('click',()=>{if(wzStep===steps.length-1&&profile.finished)closeDrawer();});
-window.addEventListener('hashchange',()=>{if(location.hash==='#budget-builder')openDrawer(false);else closeDrawer(false);});
+document.getElementById('wz-next').addEventListener('click',()=>{
+  if(wzStep===steps.length-1&&profile.finished)finishClose();
+});
+window.addEventListener('hashchange',()=>{
+  if(location.hash==='#budget-builder')openDrawer(false);
+  else if(isOpen&&drawerDirty)history.replaceState(null,'',location.pathname+location.search+'#budget-builder');
+  else requestDrawerClose('navigation',false);
+});
 document.addEventListener('keydown',e=>{
-  if(!isOpen)return;
-  if(e.key==='Escape'){e.preventDefault();closeDrawer();return;}
+  if(!isOpen||!discardDialog.hidden)return;
+  if(e.key==='Escape'){
+    e.preventDefault();
+    if(drawerDirty)onboarding.querySelector('#noovuu-cancel').focus();
+    else requestDrawerClose('escape');
+    return;
+  }
   if(e.key!=='Tab')return;
   const focusables=Array.from(onboarding.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')).filter(el=>el.getClientRects().length);
   if(!focusables.length)return;
