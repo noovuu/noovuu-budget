@@ -107,3 +107,348 @@ input[type=range] { accent-color: var(--color-surface-control-selected); }
   .panel { padding: var(--spacing-4); }
   .heading h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
 }
+
+
+/* NDS application pass 2 — make the design system visible throughout the page.
+ * All palette, typography and sizing decisions map to NDS Foundations tokens.
+ * Source Figma files remain strictly read-only.
+ */
+
+/* NDS font must override the original :root prototype font (same specificity). */
+:root {
+  font-family: var(--font-sans), "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-surface-page);
+}
+body {
+  color: var(--color-text-primary);
+  background: var(--color-surface-page);
+  padding-top: 76px;
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+}
+body, button, input, select, textarea {
+  font-family: var(--font-sans), "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Figma GlobalNav: surface/page, border/300, tertiary navigation, 8px corners. */
+#noovuu-nav {
+  height: 76px;
+  background: var(--color-surface-page);
+  border-bottom: var(--border-width-1) solid var(--color-border-300);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+#noovuu-nav .nav-logo {
+  color: var(--color-text-primary);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 26px;
+  font-weight: var(--weight-bold);
+  letter-spacing: -.06em;
+}
+#noovuu-nav .nav-action {
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  color: var(--color-button-tertiary-content-default);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+#noovuu-nav .nav-action:hover {
+  background: var(--color-surface-neutral-hover);
+  color: var(--color-text-primary);
+}
+#noovuu-nav #noovuu-home[aria-current=page] {
+  background: var(--color-surface-panel);
+  color: var(--color-text-primary);
+}
+#noovuu-nav #noovuu-builder {
+  background: var(--color-button-primary-black-bg);
+  color: var(--color-button-primary-black-content);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-2) var(--spacing-4);
+}
+#noovuu-nav #noovuu-builder:hover,
+#noovuu-nav #noovuu-builder[aria-current=page] {
+  background: var(--color-button-primary-black-bg-hover);
+  color: var(--color-button-primary-black-content);
+}
+#noovuu-nav .nav-field {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+#noovuu-nav select {
+  border: var(--border-width-1) solid var(--color-border-field-enabled);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-field-enabled);
+  color: var(--color-text-primary);
+}
+
+/* Actual calculator surface: NDS typography, spacing, cards and information hierarchy. */
+main {
+  max-width: 1320px;
+  padding: var(--spacing-8) var(--spacing-6) 88px;
+}
+main > header {
+  padding-bottom: var(--spacing-4);
+  border-bottom: var(--border-width-1) solid var(--color-border-200);
+  margin-bottom: var(--spacing-8);
+}
+main > header .brand {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  color: var(--color-text-primary);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -.025em;
+}
+main > header .brand small {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-sans), sans-serif;
+  font-weight: var(--weight-medium);
+  letter-spacing: .08em;
+}
+main > header .chip {
+  border-color: var(--color-border-200);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  background: var(--color-surface-page);
+}
+main .heading {
+  align-items: flex-end;
+  margin-bottom: var(--spacing-5);
+}
+main .heading h1 {
+  margin: 0 0 var(--spacing-2);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-h1);
+  letter-spacing: -.045em;
+  color: var(--color-text-primary);
+}
+main .heading p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  max-width: 780px;
+}
+
+/* NDS panel surface contrasts against the main white workspace. */
+main > section.panel {
+  background: var(--color-surface-panel);
+  border: var(--border-width-1) solid var(--color-border-200);
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+}
+main .inputs {
+  gap: var(--spacing-8);
+}
+main .input-head {
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+main .input-head strong {
+  color: var(--color-text-primary);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  letter-spacing: -.04em;
+}
+main .smallrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-xs);
+}
+main .fx-controls,
+main .fx-rate {
+  color: var(--color-text-secondary);
+}
+input[type=range] { accent-color: var(--color-button-primary-black-bg); }
+main .fixed-link,
+main .more,
+main .reset {
+  background: var(--color-button-primary-white-bg);
+  border-color: var(--color-border-300);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+main .fixed-link:hover,
+main .more:hover,
+main .reset:hover { background: var(--color-button-primary-white-bg-hover); }
+
+/* Inverse NDS surface clearly identifies the saved lifestyle profile. */
+main .profile-banner {
+  margin: var(--spacing-6) 0 var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-6);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  border: var(--border-width-1) solid var(--color-surface-inverse);
+  border-radius: var(--radius-lg);
+}
+main .profile-banner strong { color: var(--color-text-inverse); font-size: var(--text-base); }
+main .profile-banner .sub { color: var(--color-text-inverse); opacity: .75; font-size: var(--text-sm); }
+main .profile-banner button {
+  border-radius: var(--radius-md);
+  border: var(--border-width-1) solid var(--color-border-200);
+  background: var(--color-button-primary-white-bg);
+  color: var(--color-button-primary-white-content);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+main .profile-banner button:hover { background: var(--color-button-primary-white-bg-hover); }
+
+/* NDS view toggles use neutral surface with a decisive selected state. */
+.toolbar { margin: var(--spacing-5) 0 var(--spacing-5); }
+.toolbar .toggle {
+  background: var(--color-surface-panel);
+  border: var(--border-width-1) solid var(--color-border-200);
+  border-radius: var(--radius-md);
+}
+.toolbar .toggle button {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+.toolbar .toggle button.active {
+  color: var(--color-button-primary-black-content);
+  background: var(--color-button-primary-black-bg);
+  box-shadow: none;
+}
+.toolbar .toggle button:not(.active):hover { background: var(--color-surface-neutral-hover); }
+
+/* NDS city cards: warm panels, crisp geometry, black totals, semantic status. */
+#cards { gap: var(--spacing-4); }
+#cards > article.city.panel {
+  background: var(--color-surface-panel);
+  border: var(--border-width-1) solid var(--color-border-200);
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+  padding: var(--spacing-5);
+  transition: border-color 150ms ease;
+}
+#cards > article.city.panel:hover { border-color: var(--color-border-400); }
+#cards .city-title {
+  color: var(--color-text-primary);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -.035em;
+}
+#cards .country,
+#cards .muted,
+#cards .expense-meta {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+}
+#cards .big {
+  color: var(--color-text-primary);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: var(--text-display-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: -.055em;
+  margin-top: var(--spacing-6);
+}
+#cards .tag {
+  border-radius: var(--radius-md);
+  color: var(--color-text-success);
+  background: var(--color-surface-success);
+}
+#cards .stat {
+  background: var(--color-surface-default);
+  border: var(--border-width-1) solid var(--color-border-200);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+}
+#cards .stat span { color: var(--color-text-secondary); }
+#cards .stat strong { color: var(--color-text-primary); font-weight: var(--weight-semibold); }
+#cards .meter {
+  background: var(--color-border-200);
+  border-radius: var(--radius-full);
+}
+#cards .meter .used { background: var(--color-text-secondary); }
+#cards .meter .left { background: var(--color-status-success-500); }
+#cards .expense-title {
+  border-top-color: var(--color-border-200);
+  color: var(--color-text-primary);
+}
+#cards .split { color: var(--color-text-secondary); }
+#cards .split strong { color: var(--color-text-primary); }
+
+/* Budget Builder follows NDS primary actions, focus, modal and scrim surfaces. */
+#onboarding { background: var(--color-surface-page); }
+#onboarding .noovuu-drawer-head {
+  background: var(--color-surface-page);
+  border-bottom: var(--border-width-1) solid var(--color-border-300);
+}
+#onboarding .noovuu-drawer-head strong {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  color: var(--color-text-primary);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+}
+#onboarding .wz-card {
+  padding: var(--spacing-6);
+  border: var(--border-width-1) solid var(--color-border-200);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-panel);
+  box-shadow: none;
+}
+#onboarding .wz-card h1 {
+  font-size: var(--text-h1);
+  line-height: var(--leading-h1);
+  color: var(--color-text-primary);
+}
+#onboarding .wz-eyebrow { color: var(--color-text-secondary); }
+#onboarding .wz-progress { background: var(--color-border-200); }
+#onboarding .wz-progress > div { background: var(--color-button-primary-black-bg); }
+#onboarding .wz-btn {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+#onboarding .wz-choice,
+#onboarding .wz-field input,
+#onboarding .wz-field textarea,
+#onboarding .wz-field select {
+  font-size: var(--text-base);
+  border-radius: var(--radius-md);
+}
+#onboarding .wz-choice.selected {
+  border-color: var(--color-border-interactive-selected);
+  background: var(--color-surface-interactive-selected);
+}
+#onboarding .wz-help, #onboarding .wz-disclaimer { color: var(--color-text-tertiary); }
+#noovuu-scrim, #noovuu-confirm { background: var(--color-surface-scrim); }
+
+/* No changes to the non-dismissable dirty-drawer and discard-confirmation logic. */
+#noovuu-confirm .noovuu-confirm-panel,
+.fixed-modal { border-radius: var(--radius-xl); box-shadow: 0 18px 60px rgba(0,0,0,.12); }
+#noovuu-confirm #noovuu-discard { color: var(--color-button-primary-destructive-content, #fff); }
+#noovuu-confirm #noovuu-discard:hover { background: var(--color-button-primary-destructive-bg-hover); }
+
+@media (max-width: 900px) {
+  main { padding: var(--spacing-6) var(--spacing-4) 56px; }
+}
+@media (max-width: 649px) {
+  main { padding: var(--spacing-5) var(--spacing-3) 48px; }
+  main .heading h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
+  main .inputs { gap: var(--spacing-5); }
+  #cards > article.city.panel { padding: var(--spacing-4); }
+  #onboarding .wz-card { padding: var(--spacing-4); }
+  main .profile-banner { padding: var(--spacing-4); }
+}
+@media (max-width: 490px) {
+  body { padding-top: 112px; }
+  #noovuu-nav { height: auto; min-height: 105px; }
+  #noovuu-nav .nav-logo { font-size: 22px; }
+  #noovuu-nav .nav-action { font-size: var(--text-sm); padding: var(--spacing-1) var(--spacing-2); }
+  #noovuu-nav #noovuu-builder { padding: var(--spacing-1) var(--spacing-2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cards > article.city.panel { transition: none; }
+}
