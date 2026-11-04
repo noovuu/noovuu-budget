@@ -102,7 +102,7 @@ function here(city){
  return locations[city]&&validPoint(coordinates[city])?coordinates[city]:centre(city);
 }
 function homeLabel(city){
- return locations[city]?(validPoint(coordinates[city])?'Your planning location':'Address saved · location not verified'):'Example city centre';
+ return locations[city]?(validPoint(coordinates[city])?'Approximate planning location':'Address saved · location not verified'):'Example city centre';
 }
 function kind(tags){
  if(!tags)return '';
@@ -221,7 +221,7 @@ function resourceShell(city){
  '<div class="resource-map-loading">Loading your neighborhood map…</div></div>'+
  '<div class="plan-pin-key"><span><i class="pin-home"></i>Home</span><span><i class="pin-primary"></i>Recommended</span><span><i class="pin-secondary"></i>Alternative</span></div>'+
  '<div class="resource-pair" aria-live="polite"></div>'+
- '<p class="resources-privacy">Locations: OpenStreetMap data and reviewed listings. Straight-line distances are not driving times. Rankings currently favor proximity and relevant store type, not confirmed local prices. Map: © OpenStreetMap contributors.</p>';
+ '<p class="resources-privacy">These are specific venues, not price-verified endorsements. Recommendations reflect proximity, business type, and available lifestyle information. Entering an address shares it with a geocoding provider; the address is stored locally. Distances are straight-line, not driving times. Map © OpenStreetMap contributors.</p>';
  return sec;
 }
 function renderPairs(city,section){
@@ -241,7 +241,8 @@ function renderPairs(city,section){
   return '<article class="resource-place '+(primary?'is-primary':'is-alternate')+'">'+
    '<div class="place-status"><span class="place-status-dot"></span>'+
    (primary?'Recommended':'Alternative')+'</div>'+
-   '<strong>'+name+'</strong>'+
+   '<button type="button" class="resource-place-name" data-focus-place="'+escapeText(p.id)+
+   '" data-city="'+escapeText(city)+'" title="View '+name+' on the map">'+name+' ↗</button>'+
    '<p class="place-address">'+where+'</p>'+
    '<p class="place-why">'+escapeText(why(p,city,currentCategory))+'</p>'+
    '<button type="button" data-choose-place="'+escapeText(p.id)+
@@ -266,15 +267,17 @@ function updatePins(city,section,spots){
  const record=currentMaps.get(city);
  if(!record||record.container!==section.querySelector('[data-resource-map]'))return;
  record.layer.clearLayers();
+ record.markerById=new Map();
  const center=here(city);
  L.marker([center.lat,center.lon],{icon:pinIcon('home'),keyboard:true,title:homeLabel(city)}).addTo(record.layer).bindPopup(escapeText(homeLabel(city)));
  const pts=[[center.lat,center.lon]];
  spots.forEach((p,i)=>{
   if(!validPoint(p))return;
   const pt=[+p.lat,+p.lon];pts.push(pt);
-  L.marker(pt,{icon:pinIcon(i===0?'primary':'secondary'),keyboard:true,title:p.name})
-   .addTo(record.layer).bindPopup('<strong>'+escapeText(p.name)+'</strong>'+
+  const marker=L.marker(pt,{icon:pinIcon(i===0?'primary':'secondary'),keyboard:true,title:p.name})
+   .addTo(record.layer).bindPopup('<strong>'+escapeText(p.name)+'</strong'+
      '<p>'+escapeText(p.address||city)+'</p><small>'+escapeText(i===0?'Recommended':'Alternative')+'</small>');
+  record.markerById.set(p.id,marker);
  });
  if(pts.length>1){
   record.map.fitBounds(L.latLngBounds(pts).pad(.35),{animate:false,maxZoom:14});
@@ -326,7 +329,7 @@ function apply(){
   renderPairs(city,resources);
   const isCurated=curated[city]&&curated[city][currentCategory];
   if(isCurated)locateCurated(city,currentCategory);
-  discover(city);
+  if(!locations[city]||validPoint(coordinates[city]))discover(city);
  });
 }
 render=function(){oldRender();apply();};
@@ -351,7 +354,8 @@ function queuedGeocode(query,origin,cacheId){
   });
   if(!result)throw Error('Address could not be located in this city');
   const c=result.geometry.coordinates,p={lat:+c[1],lon:+c[0]};
-  cache[cacheId]=p;save('noovuu-venue-geocodes-v1',cache);
+  const current=load('noovuu-venue-geocodes-v1');current[cacheId]=p;
+  save('noovuu-venue-geocodes-v1',current);
   return p;
  });
  inflight[cacheId]=geocodeQueue.finally(()=>{delete inflight[cacheId];});
@@ -466,6 +470,18 @@ tabs.addEventListener('keydown',e=>{
 cards.addEventListener('click',e=>{
  const cat=e.target.closest('button[data-category]');
  if(cat){currentCategory=cat.dataset.category;rerenderCategory();return;}
+ const focus=e.target.closest('button[data-focus-place]');
+ if(focus){
+  const city=focus.dataset.city;
+  const entry=currentMaps.get(city);
+  const marker=entry&&entry.markerById&&entry.markerById.get(focus.dataset.focusPlace);
+  if(marker){
+   entry.map.setView(marker.getLatLng(),Math.max(14,entry.map.getZoom()),{animate:true});
+   marker.openPopup();
+   entry.container.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  return;
+ }
  const choose=e.target.closest('button[data-choose-place]');
  if(choose){
   const city=choose.dataset.city,category=choose.dataset.category,id=choose.dataset.choosePlace;
