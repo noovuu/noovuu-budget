@@ -486,6 +486,25 @@ cards.addEventListener('click',e=>{
    entry.map.setView(marker.getLatLng(),Math.max(14,entry.map.getZoom()),{animate:true});
    marker.openPopup();
    entry.container.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }else{
+   const p=options(city,currentCategory).find(x=>x.id===focus.dataset.focusPlace);
+   if(p&&p.source==='Reviewed local listing'){
+    focus.textContent='Locating on map…';
+    locateCurated(city,currentCategory).then(()=>{
+     const latest=currentMaps.get(city);
+     const match=latest&&latest.markerById&&latest.markerById.get(p.id);
+     if(match){
+      latest.map.setView(match.getLatLng(),14,{animate:true});
+      match.openPopup();
+      latest.container.scrollIntoView({behavior:'smooth',block:'nearest'});
+     }else if(focus.isConnected){
+      focus.textContent=p.name+' · precise pin unavailable';
+      focus.setAttribute('aria-label','Precise map position unavailable for '+p.name);
+     }
+    });
+   }else if(focus.isConnected){
+    focus.textContent=p?p.name+' · pin unavailable':'Place unavailable';
+   }
   }
   return;
  }
@@ -520,7 +539,11 @@ cards.addEventListener('click',e=>{
  }
  const changed=locations[city]!==address;
  locations[city]=address;
- if(changed)delete coordinates[city];
+ if(changed){
+  delete coordinates[city];
+  // A new home location needs a new proximity-based recommendation set.
+  delete selected[city];save(selectedKey,selected);
+ }
  save(addressKey,locations);save(pointKey,coordinates);
  render();
  if(changed||!validPoint(coordinates[city]))geocodeStay(city);
