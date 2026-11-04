@@ -483,3 +483,28 @@
 @media(max-width:470px){
  #cards .resource-pair{grid-template-columns:1fr;}
 }
+
+/* Specific place names are actionable in-app links focusing the pin. */
+#cards .resource-place .resource-place-name{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--nx-text,#202124);
+  font-size:15px;
+  font-weight:600;
+  line-height:1.4;
+  text-align:left;
+  cursor:pointer;
+}
+#cards .resource-place .resource-place-name:hover{
+  color:var(--nx-primary,#1a73e8);
+  text-decoration:underline;
+}
+#cards .resource-place .resource-place-name:focus-visible{
+  outline:2px solid var(--nx-primary,#1a73e8);
+  outline-offset:3px;
+}
