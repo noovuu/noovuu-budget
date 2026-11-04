@@ -156,7 +156,14 @@ function osmPlaces(city,category){
 function score(p,city,category){
  const dist=haversine(here(city),p);
  const tags=p.tags||{};
- return (dist===null?-11:-dist*2.1)+tierScore(p.name,tags,category)*2.1;
+ const preferences=typeof profile==='object'?profile:{};
+ const diet=String(preferences.diet||'').toLowerCase();
+ let dietFit=0;
+ if(category==='restaurants'||category==='cafes'){
+   if(diet.includes('vegan')&&tags['diet:vegan']==='yes')dietFit=2.5;
+   else if(diet.includes('vegetarian')&&tags['diet:vegetarian']==='yes')dietFit=2.5;
+ }
+ return (dist===null?-11:-dist*2.1)+tierScore(p.name,tags,category)*2.1+dietFit;
 }
 function options(city,category){
  const raw=[...osmPlaces(city,category),...curatedPlaces(city,category)];
@@ -213,7 +220,7 @@ function resourceShell(city){
  '" aria-pressed="'+String(currentCategory===c.id)+'">'+escapeText(c.label)+'</button>').join('');
  sec.innerHTML=
  '<div class="plan-heading"><strong>Your local plan</strong><span class="plan-context">'+escapeText(homeLabel(city))+'</span></div>'+
- '<p class="plan-intro">Two named choices in each category. Select a regular spot to personalize your plan; blue marks your primary choice and amber marks the alternative.</p>'+
+ '<p class="plan-intro">Two named places to make part of your routine, using your budget, location and available lifestyle preferences. Blue is primary, amber is the alternative. Select one to make it yours.</p>'+
  '<div class="resource-category-tabs" role="group" aria-label="Resource type">'+cats+'</div>'+
  '<div class="plan-guidance">'+escapeText(categoryBudget(city,currentCategory))+
  '<span> · Prices and memberships not yet verified</span></div>'+
