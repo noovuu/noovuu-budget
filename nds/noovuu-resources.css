@@ -1,0 +1,221 @@
+/*
+ * Noovuu Resources: Advanced View location planning.
+ * Separate from NDS Foundations; no Figma files are modified.
+ * Built on the spacious visual treatment already used in Noovuu.
+ */
+#advanced-tabs[hidden]{display:none!important;}
+#advanced-tabs {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:max-content;
+  max-width:100%;
+  padding:6px;
+  margin:8px 0 28px;
+  border:1px solid var(--nx-divider, #e8eaed);
+  border-radius:999px;
+  background:var(--nx-soft, #f8f9fa);
+}
+#advanced-tabs button {
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--nx-secondary, #5f6368);
+  padding:12px 24px;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.35;
+  cursor:pointer;
+  white-space:nowrap;
+}
+#advanced-tabs button:hover {background:var(--nx-divider,#e8eaed);}
+#advanced-tabs button[aria-selected="true"]{
+  background:var(--nx-selected,#e8f0fe);
+  color:var(--nx-primary,#1a73e8);
+  font-weight:600;
+}
+#cards.advanced.resources-mode .city .big,
+#cards.advanced.resources-mode .city .fx-line,
+#cards.advanced.resources-mode .city .muted,
+#cards.advanced.resources-mode .city .meter,
+#cards.advanced.resources-mode .city .split,
+#cards.advanced.resources-mode .city .detail-summary,
+#cards.advanced.resources-mode .city .advanced-only{
+  display:none!important;
+}
+#cards.advanced .planning-address{
+  margin:24px 0 8px;
+  padding:20px 0 14px;
+  border-top:1px solid var(--nx-divider,#e8eaed);
+}
+#cards.advanced .planning-address-label {
+  display:block;
+  color:var(--nx-text,#202124);
+  font-size:13px;
+  font-weight:600;
+  line-height:1.5;
+  margin:0 0 12px;
+}
+#cards.advanced .planning-address-label span {
+  color:var(--nx-muted,#80868b);
+  font-weight:400;
+}
+#cards.advanced .planning-address-controls {
+  display:flex;
+  align-items:stretch;
+  gap:8px;
+  flex-wrap:wrap;
+}
+#cards.advanced .planning-address-controls input{
+  display:block;
+  flex:1 1 160px;
+  min-width:0;
+  width:100%;
+  height:44px;
+  padding:11px 13px;
+  border:1px solid var(--nx-border,#dadce0);
+  background:var(--nx-page,#fff);
+  border-radius:10px;
+  color:var(--nx-text,#202124);
+  font-size:13px;
+  font-weight:400;
+}
+#cards.advanced .planning-address-controls input::placeholder{
+  color:var(--nx-muted,#80868b);
+}
+#cards.advanced .planning-address-controls button {
+  flex:0 0 auto;
+  min-height:44px;
+  border:1px solid var(--nx-selected-border,#d2e3fc);
+  border-radius:999px;
+  color:var(--nx-primary,#1a73e8);
+  background:var(--nx-selected,#e8f0fe);
+  font-size:13px;
+  font-weight:600;
+  padding:10px 15px;
+}
+#cards.advanced .planning-address-controls button:hover{
+  background:var(--nx-selected-border,#d2e3fc);
+}
+#cards.advanced .planning-address-controls button.planning-address-clear{
+  background:transparent;
+  border-color:var(--nx-border,#dadce0);
+  color:var(--nx-secondary,#5f6368);
+}
+#cards.advanced .planning-address-hint{
+  font-size:12px;
+  line-height:1.6;
+  color:var(--nx-muted,#80868b);
+  margin:11px 0 0;
+}
+#cards .resources-card{
+  margin:22px 0 0;
+  min-width:0;
+}
+#cards .resources-header{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+#cards .resources-header strong{
+  font-size:15px;
+  font-weight:600;
+  color:var(--nx-text,#202124);
+}
+#cards .resources-map-status{
+  font-size:12px;
+  color:var(--nx-secondary,#5f6368);
+}
+#cards .resources-map-frame {
+  overflow:hidden;
+  border:1px solid var(--nx-border,#dadce0);
+  border-radius:14px;
+  background:var(--nx-soft,#f8f9fa);
+  width:100%;
+  min-width:0;
+  height:240px;
+}
+#cards .resources-map-frame iframe {
+  width:100%;
+  height:100%;
+  display:block;
+  border:0;
+}
+#cards .resource-no-map{
+  padding:32px 16px;
+  color:var(--nx-secondary,#5f6368);
+  font-size:13px;
+}
+#cards .resources-map-actions{
+  margin:12px 0 28px;
+}
+#cards .resources-map-actions a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--nx-primary,#1a73e8);
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+}
+#cards .resources-map-actions a:hover {text-decoration:underline;}
+#cards .resources-card h3{
+  margin:0 0 8px;
+  color:var(--nx-text,#202124);
+  font-size:15px;
+  line-height:1.4;
+  font-weight:600;
+}
+#cards .resources-card p {
+  margin:0 0 18px;
+  color:var(--nx-secondary,#5f6368);
+  font-size:13px;
+  line-height:1.65;
+}
+#cards .resource-category-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 22px;
+}
+#cards .resource-category-links a {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-width:0;
+  padding:13px 12px;
+  border:1px solid var(--nx-divider,#e8eaed);
+  border-radius:11px;
+  background:var(--nx-page,#fff);
+  color:var(--nx-text,#202124);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:500;
+  line-height:1.5;
+}
+#cards .resource-category-links a span {color:var(--nx-primary,#1a73e8);}
+#cards .resource-category-links a:hover{
+  border-color:var(--nx-selected-border,#d2e3fc);
+  background:var(--nx-selected,#e8f0fe);
+}
+#cards .resources-card p.resources-privacy{
+  border-top:1px solid var(--nx-divider,#e8eaed);
+  margin:0;
+  padding-top:16px;
+  font-size:11px;
+  line-height:1.7;
+  color:var(--nx-muted,#80868b);
+}
+@media (max-width:720px){
+  #advanced-tabs {margin:10px 0 22px;}
+  #advanced-tabs button {padding:11px 22px;}
+  #cards .resources-map-frame {height:250px;}
+}
+@media(max-width:420px){
+  #cards .resource-category-links {grid-template-columns:1fr;}
+  #cards.advanced .planning-address-controls button {flex:1 1 auto;}
+}
