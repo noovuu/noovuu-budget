@@ -275,7 +275,7 @@ function updatePins(city,section,spots){
   if(!validPoint(p))return;
   const pt=[+p.lat,+p.lon];pts.push(pt);
   const marker=L.marker(pt,{icon:pinIcon(i===0?'primary':'secondary'),keyboard:true,title:p.name})
-   .addTo(record.layer).bindPopup('<strong>'+escapeText(p.name)+'</strong'+
+   .addTo(record.layer).bindPopup('<strong>'+escapeText(p.name)+'</strong>'+
      '<p>'+escapeText(p.address||city)+'</p><small>'+escapeText(i===0?'Recommended':'Alternative')+'</small>');
   record.markerById.set(p.id,marker);
  });
