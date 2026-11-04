@@ -508,3 +508,12 @@
   outline:2px solid var(--nx-primary,#1a73e8);
   outline-offset:3px;
 }
+
+#cards .resource-place .resource-place-focus{
+  display:block;
+  margin-top:6px;
+  color:var(--nx-primary,#1a73e8);
+  font-weight:500;
+  font-size:11px;
+  line-height:1.35;
+}
