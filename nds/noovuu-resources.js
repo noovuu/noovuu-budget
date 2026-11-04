@@ -249,7 +249,7 @@ function renderPairs(city,section){
    '<div class="place-status"><span class="place-status-dot"></span>'+
    (primary?'Recommended':'Alternative')+'</div>'+
    '<button type="button" class="resource-place-name" data-focus-place="'+escapeText(p.id)+
-   '" data-city="'+escapeText(city)+'" title="View '+name+' on the map">'+name+' ↗</button>'+
+   '" data-city="'+escapeText(city)+'" title="Focus '+name+' on the in-app map">'+name+'<span class="resource-place-focus">View on map</span></button>'+
    '<p class="place-address">'+where+'</p>'+
    '<p class="place-why">'+escapeText(why(p,city,currentCategory))+'</p>'+
    '<button type="button" data-choose-place="'+escapeText(p.id)+
