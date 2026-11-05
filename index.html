@@ -497,7 +497,60 @@ document.addEventListener('pointerdown',event=>{
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&!cityChoosePanel.hidden){event.preventDefault();closeCitySelector(true);}
 });
-document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;releaseUnlockedAccommodationDrafts();fixedEntries=[{id:fixedNextId++,name:'Other recurring expenses (estimate)',amount:1000}];syncFixedTotals();state.prices=structuredClone(defaults);render()};render();
+document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;state.retention={mode:'percent',value:50};releaseUnlockedAccommodationDrafts();fixedEntries=[{id:fixedNextId++,name:'Other recurring expenses (estimate)',amount:1000}];syncFixedTotals();state.prices=structuredClone(defaults);render()};
+// The retention target is a comparison benchmark, never a spending deduction.
+// Values are bounded on every input, including when income changes elsewhere.
+const retentionEntry=document.getElementById('retainValue');
+const retentionSlider=document.getElementById('retain');
+const parseRetentionInput=text=>{
+ const raw=String(text).trim();
+ if(!raw||raw.includes('-'))return null;
+ const clean=raw.replace(/[^0-9.]/g,'');
+ if(!/^(?:[0-9]+(?:[.][0-9]*)?|[.][0-9]+)$/.test(clean))return null;
+ const num=Number(clean);
+ return Number.isFinite(num)?num:null;
+};
+function setRetentionFromVisibleAmount(text,source){
+ const amount=parseRetentionInput(text);
+ if(amount===null){
+  if(source==='entry')retentionEntry.setAttribute('aria-invalid','true');
+  return false;
+ }
+ retentionEntry.removeAttribute('aria-invalid');
+ const percentage=state.retention.mode==='percent';
+ const amountCAD=percentage?amount:amount/retentionRate();
+ const ceiling=percentage?100:Math.max(0,state.income);
+ const bounded=Math.max(0,Math.min(ceiling,amountCAD));
+ state.retention.value=bounded;
+ render();
+ // When the user exceeds their income or 100%, immediately display the cap.
+ if(source==='entry'&&Math.abs(bounded-amountCAD)>0.001){
+  retentionEntry.value=retentionFormat(percentage?bounded:retentionDisplayAmount(bounded));
+ }
+ return true;
+}
+retentionEntry.addEventListener('input',()=>setRetentionFromVisibleAmount(retentionEntry.value,'entry'));
+retentionEntry.addEventListener('change',()=>setRetentionFromVisibleAmount(retentionEntry.value,'entry'));
+retentionEntry.addEventListener('blur',()=>{
+ retentionEntry.removeAttribute('aria-invalid');
+ retentionEntry.value=retentionFormat(state.retention.mode==='percent'?state.retention.value:retentionDisplayAmount(state.retention.value));
+});
+retentionEntry.addEventListener('keydown',event=>{
+ if(event.key==='Enter'){
+  event.preventDefault();
+  setRetentionFromVisibleAmount(retentionEntry.value,'entry');
+  retentionEntry.blur();
+ }
+ if(event.key==='Escape'){
+  event.preventDefault();
+  retentionEntry.value=retentionFormat(state.retention.mode==='percent'?state.retention.value:retentionDisplayAmount(state.retention.value));
+  retentionEntry.blur();
+ }
+});
+retentionSlider.addEventListener('input',()=>setRetentionFromVisibleAmount(retentionSlider.value,'range'));
+document.getElementById('retain-mode-money').addEventListener('click',()=>setRetentionMode('money'));
+document.getElementById('retain-mode-percent').addEventListener('click',()=>setRetentionMode('percent'));
+render();
 </script>
 <script>
 /* Standalone, no-backend onboarding: explicit inputs -> explainable illustrative city adjustments. */
