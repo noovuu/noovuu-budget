@@ -36,8 +36,8 @@
      '<div id="agent-chat" aria-label="Agent conversation">'+
        '<div class="agent-chat-bubble agent-chat-assistant">'+
         '<strong>Plan your life, one city at a time.</strong>'+
-        '<p>Adjust your income, housing, and fixed expenses above. The city comparisons update as you make changes.</p>'+
-        '<p>This is an interactive agent prototype. Try <code>rent 750</code>, <code>income 8204</code>, or <code>fixed 1000</code>.</p>'+
+        '<p>Adjust your income and accommodations in the budget card. For fixed expenses, open Edit fixed expenses and change your recurring items.</p>'+
+        '<p>This is an interactive agent prototype. Try <code>rent 750</code> or <code>income 8204</code>. Fixed expenses are itemized separately.</p>'+
        '</div>'+
        '<div id="agent-messages" role="log" aria-live="polite" aria-relevant="additions"></div>'+
      '</div>'+
@@ -256,7 +256,13 @@
     message.value='';
     const parsed=amountFrom(text);
     if(!parsed){
-      appendMessage('This prototype can adjust your budget using commands such as “income 8204”, “rent 750”, or “fixed 1000”. Full AI conversation is not connected yet.',false);
+      appendMessage('Try “income 8204” or “rent 750”. For fixed monthly expenses, use the Edit fixed expenses button. Full AI conversation is not connected yet.',false);
+      return;
+    }
+    if(parsed.category==='fixed'){
+      // Never let chat commands override itemized recurring commitments.
+      document.getElementById('openFixedEditor')?.click();
+      appendMessage('Fixed expenses are calculated from your itemized recurring payments. Use the editor to change individual entries; totals and city cards update automatically.',false);
       return;
     }
     const editor=document.getElementById(parsed.category+'Value');
@@ -264,7 +270,7 @@
     editor.value=String(parsed.value);
     editor.dispatchEvent(new Event('input',{bubbles:true}));
     editor.blur();
-    const label=parsed.category==='income'?'Income':parsed.category==='rent'?'Housing budget':'Fixed monthly expenses';
+    const label=parsed.category==='income'?'Income':'Accommodations budget';
     appendMessage(label+' updated to '+editor.value+'. Your city comparison has been recalculated.',false);
   });
   message.addEventListener('keydown',function(e){
