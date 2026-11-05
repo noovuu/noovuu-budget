@@ -71,3 +71,24 @@ body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1f
 #noovuu-agent #onboarding .wz-actions{margin:22px 0 0;gap:9px}
 #noovuu-agent #onboarding .wz-btn{padding:11px 15px;min-height:43px;font-size:12px;border-radius:999px}
 #noovuu-agent #onboarding .wz-disclaimer{margin:16px 6px 0;font-size:10px;line-height:1.5;color:#80868b}
+
+/* Composer and tool shortcuts pinned below the scrolling agent experience. */
+#agent-bottom{flex:0 0 auto;padding:12px 17px 15px;border-top:1px solid #e8eaed;background:#fff}
+#agent-composer label{display:block;margin:0 0 8px;color:#5f6368;font-size:11px;font-weight:600}
+#agent-composer .agent-message-row{display:flex;align-items:flex-end;gap:9px;min-height:65px;padding:9px;border:1px solid #dadce0;border-radius:15px;background:#fff}
+#agent-composer .agent-message-row:focus-within{border-color:#1a73e8;box-shadow:0 0 0 2px #d2e3fc}
+#agent-message{flex:1 1 auto;resize:vertical;min-width:0;max-height:115px;min-height:38px;padding:8px 6px;border:0;background:transparent;outline:0!important;box-shadow:none!important;color:#202124;font-size:13px;line-height:1.45}
+#agent-message::placeholder{color:#80868b}
+#agent-send{flex:0 0 36px;display:flex;align-items:center;justify-content:center;height:36px;border:0;border-radius:10px;background:#1a73e8;color:#fff;font-size:22px}
+#agent-send:hover{background:#1765cc}
+#noovuu-agent .agent-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:11px 0 0}
+#agent-tool-builder{display:inline-flex;align-items:center;gap:8px;padding:6px 9px 6px 6px;border:1px solid #e8eaed;border-radius:999px;background:#fff;color:#202124;font-size:11px;font-weight:600;line-height:1.3;white-space:nowrap}
+#agent-tool-builder:hover,#agent-tool-builder[aria-pressed=true]{background:#e8f0fe;border-color:#d2e3fc;color:#1a73e8}
+#agent-tool-builder .agent-tool-icon{display:flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;background:#e8f0fe;color:#1a73e8;font-size:15px;font-weight:600}
+#agent-prototype-note{color:#80868b;font-size:10px;line-height:1.35;text-align:right}
+/* Canvas adapts when 420px is reserved on laptop and desktop. */
+@media(min-width:901px) and (max-width:1099px){body.agent-sidebar-open main{padding:30px 22px 72px}body.agent-sidebar-open #cards.layout{grid-template-columns:1fr!important}}
+@media(max-width:900px){#noovuu-agent{position:relative;top:auto;bottom:auto;width:100%;max-width:none;height:auto;max-height:none;border-right:0;border-bottom:1px solid #e8eaed;box-shadow:none;transition:none}body:not(.agent-sidebar-open) #noovuu-agent{display:none}body.agent-sidebar-open main{width:100%;margin:0;padding:30px 20px 70px}#agent-controls{max-height:360px}#agent-body{min-height:180px;max-height:350px}#noovuu-agent.agent-builder-active #agent-body{min-height:280px;max-height:550px}#noovuu-agent.agent-builder-active #agent-controls{max-height:270px}body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:649px){body.agent-sidebar-open main{padding:24px 16px 58px}body.agent-sidebar-open #cards.layout{display:flex!important;grid-template-columns:none!important;overflow-x:auto}#agent-controls{max-height:340px}#agent-body{max-height:290px}#agent-controls .input-head .budget-value-input{font-size:19px!important}}
+@media(max-width:490px){#noovuu-agent .agent-header{height:62px}#agent-controls{padding:12px 16px 8px}}
+@media(prefers-reduced-motion:reduce){#noovuu-agent,body.agent-sidebar-open main{transition:none!important}}
