@@ -1,0 +1,137 @@
+/* Noovuu / NDS Switch adapter
+   Exact Figma NDS Components node 1:15785 (Selected=true, Size=sm):
+   38 × 20px track, 2px horizontal inset, 16 × 16px circular handle.
+   Selected handle x=20; unselected x=2.
+   Colors sourced from the read-only NDS token export.
+
+   Figma reference: https://www.figma.com/design/1PGClUIE7siCUmnGSkdlUH/NDS-Components?node-id=1-15785
+   Keep the entire 42px-tall Lock control as the accessible click target,
+   while only the nested actual NDS switch surface is 38 × 20px. */
+
+/* Undo the formerly invented 112px-wide, 27px-thumb, filled switch pill. */
+#cards .accommodations-action-group button.accommodations-lock,
+#cards .accommodations-action-group button.accommodations-lock[aria-checked="true"]{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:42px!important;
+  min-height:42px!important;
+  max-height:42px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--noovuu-action-text,#20323d)!important;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif)!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+  font-weight:500!important;
+  white-space:nowrap;
+  cursor:pointer;
+  filter:none!important;
+}
+#cards .accommodations-action-group button.accommodations-lock::before,
+#cards .accommodations-action-group button.accommodations-lock[aria-checked="true"]::before{
+  content:none!important;
+  display:none!important;
+}
+
+/* Figma NDS primitive: no border, no shadow, exact size and radius. */
+#cards .accommodations-action-group .nds-switch-track{
+  box-sizing:border-box;
+  display:flex;
+  flex:0 0 38px;
+  align-items:center;
+  justify-content:flex-start;
+  gap:0;
+  width:38px;
+  min-width:38px;
+  max-width:38px;
+  height:20px;
+  min-height:20px;
+  max-height:20px;
+  padding:2px;
+  border:0;
+  border-radius:var(--radius-full,9999px);
+  background:var(--color-surface-control-track,#888888);
+  box-shadow:none;
+  transition:background-color .16s ease;
+  pointer-events:none;
+}
+#cards .accommodations-action-group .nds-switch-handle{
+  box-sizing:border-box;
+  display:block;
+  flex:0 0 16px;
+  width:16px;
+  min-width:16px;
+  max-width:16px;
+  height:16px;
+  min-height:16px;
+  max-height:16px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:var(--radius-full,9999px);
+  background:var(--color-surface-control-handle,#ffffff);
+  box-shadow:none;
+  transform:translateX(0);
+  transition:transform .16s cubic-bezier(.2,.8,.2,1);
+  pointer-events:none;
+}
+#cards .accommodations-action-group button.accommodations-lock[aria-checked="true"] .nds-switch-track{
+  background:var(--color-surface-control-selected,#3b82f6);
+}
+#cards .accommodations-action-group button.accommodations-lock[aria-checked="true"] .nds-switch-handle{
+  transform:translateX(18px);
+}
+#cards .accommodations-action-group button.accommodations-lock:hover[aria-checked="false"] .nds-switch-track{
+  background:var(--color-surface-control-track-hover,#6a6a6a);
+}
+#cards .accommodations-action-group button.accommodations-lock:hover[aria-checked="true"] .nds-switch-track{
+  background:var(--color-surface-control-selected-hover,#2563eb);
+}
+#cards .accommodations-action-group .accommodations-lock-text{
+  display:inline-block;
+  margin:0;
+  padding:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  line-height:1.35;
+  pointer-events:none;
+}
+/* The switch is the visual focus target; keyboard users retain a strong ring. */
+#cards .accommodations-action-group button.accommodations-lock:focus-visible{
+  outline:0!important;
+}
+#cards .accommodations-action-group button.accommodations-lock:focus-visible .nds-switch-track{
+  outline:2px solid var(--color-surface-control-selected,#3b82f6);
+  outline-offset:3px;
+}
+/* Preserve 12px gap / Enter far right, and equal 42px hit areas.
+   The visible switch remains 20px tall at all sizes, exactly as Figma. */
+#cards .accommodations-action-group{
+  align-items:center;
+  gap:12px;
+}
+@media(max-width:490px){
+  #cards .accommodations-action-group button.accommodations-lock{
+    height:40px!important;
+    min-height:40px!important;
+    max-height:40px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #cards .accommodations-action-group .nds-switch-track,
+  #cards .accommodations-action-group .nds-switch-handle{
+    transition:none!important;
+  }
+}
