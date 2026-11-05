@@ -144,14 +144,28 @@ function stayLabel(city){
  const p=stayPeriod(city);
  return p.unit==='month'?'Monthly':p.count+' '+(p.unit==='days'?(p.count===1?'day':'days'):(p.count===1?'week':'weeks'));
 }
-function stayDescriptor(city){
- const p=stayPeriod(city);
- return p.unit==='month'?'month':stayLabel(city).toLowerCase();
-}
+/* Short stays preserve full monthly salary and fixed expenses; only
+ * accommodations and local living costs prorate. Longer stays scale
+ * income and fixed expenses over the entire planning horizon. */
+function stayBudgetMonths(city){return Math.max(1,stayFactor(city));}
+function stayDescriptor(city){return stayFactor(city)<=1?'month':stayLabel(city).toLowerCase();}
 function stayMoney(value,city){return money(value);}
-function stayCost(city){return spending(city)*stayFactor(city);}
-function stayIncome(city){return state.income*stayFactor(city);}
+function stayCost(city){
+ const localMonthly=Math.max(0,spending(city)-state.fixed);
+ return state.fixed*stayBudgetMonths(city)+localMonthly*stayFactor(city);
+}
+function stayIncome(city){return state.income*stayBudgetMonths(city);}
 function stayRemaining(city){return stayIncome(city)-stayCost(city);}
+function stayAssumption(city){
+ const days=stayDays(city);
+ if(days<=STAY_DAYS_PER_MONTH){
+  const unused=STAY_DAYS_PER_MONTH-days;
+  return stayLabel(city)+' of accommodations and local living costs · full monthly income and fixed expenses'+
+   (unused?' · other '+unused+' days not modeled':'')+
+   ' · 30-day planning month · not a lodging quote';
+ }
+ return stayLabel(city)+' of projected income and costs · 30-day planning month · not a lodging quote';
+}
 
 // A retention goal is a benchmark, NOT another monthly expense.
 // Dollar goals are stored in CAD; percentage goals scale with income.
