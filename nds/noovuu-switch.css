@@ -1,0 +1,111 @@
+/* NDS Switch — exact implementation of the existing Figma component,
+   not a custom button imitation.
+   Source: NDS Components / Switch / Size=sm / State=enabled
+   Selected: node 1:15785; unselected: node 1:15783.
+   Read-only source: https://www.figma.com/design/1PGClUIE7siCUmnGSkdlUH/NDS-Components?node-id=1-15785
+
+   The NDS component itself is the 38 × 20 button below. The visible Lock
+   label is a separate associated label (Figma's SwitchControl pattern).
+   No element of either Figma file is modified. */
+
+/* The 42px alignment belongs to the label/wrapper, not the switch. */
+#cards .accommodations-action-group .accommodations-switch-control{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  gap:10px;
+  height:42px;
+  min-height:42px;
+  width:auto;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+  color:var(--noovuu-action-text,#20323d);
+  cursor:pointer;
+}
+#cards .accommodations-action-group .accommodations-lock-text{
+  display:inline-block;
+  color:inherit;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:13px;
+  font-weight:500;
+  line-height:1.35;
+  white-space:nowrap;
+  user-select:none;
+  cursor:pointer;
+}
+
+/* Exact Figma NDS Switch sm: 38 wide, 20 high, 2px horizontal padding. */
+#cards .accommodations-action-group button.nds-switch,
+#cards .accommodations-action-group button.nds-switch[aria-checked="true"]{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex:0 0 38px!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  width:38px!important;
+  min-width:38px!important;
+  max-width:38px!important;
+  height:20px!important;
+  min-height:20px!important;
+  max-height:20px!important;
+  padding:0 2px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:var(--radius-full,9999px)!important;
+  background:var(--color-surface-control-track,#888888)!important;
+  box-shadow:none!important;
+  color:inherit;
+  line-height:normal;
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+  touch-action:manipulation;
+}
+#cards .accommodations-action-group button.nds-switch[aria-checked="true"]{
+  justify-content:flex-end!important;
+  background:var(--color-surface-control-selected,#3b82f6)!important;
+}
+#cards .accommodations-action-group button.nds-switch .nds-switch-handle{
+  box-sizing:border-box;
+  display:block;
+  flex:0 0 16px;
+  width:16px;
+  min-width:16px;
+  max-width:16px;
+  height:16px;
+  min-height:16px;
+  max-height:16px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:var(--radius-full,9999px);
+  background:var(--color-surface-control-handle,#ffffff);
+  box-shadow:none;
+  pointer-events:none;
+}
+/* NDS state colors, not the previously invented filled pill palette. */
+#cards .accommodations-action-group button.nds-switch:hover[aria-checked="false"]{
+  background:var(--color-surface-control-track-hover,#6a6a6a)!important;
+}
+#cards .accommodations-action-group button.nds-switch:hover[aria-checked="true"]{
+  background:var(--color-surface-control-selected-hover,#2563eb)!important;
+}
+#cards .accommodations-action-group button.nds-switch:focus-visible{
+  outline:2px solid var(--color-surface-control-selected,#3b82f6)!important;
+  outline-offset:3px;
+}
+/* Maintain the requested 12px between the *control* and Enter. */
+#cards .accommodations-action-group{
+  align-items:center;
+  gap:12px;
+}
+@media(max-width:490px){
+  #cards .accommodations-action-group .accommodations-switch-control{
+    height:40px;
+    min-height:40px;
+  }
+}
