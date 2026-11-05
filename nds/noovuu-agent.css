@@ -105,3 +105,112 @@ body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1f
 }
 #agent-controls .input-head .budget-value-input{background:#fff}
 #agent-controls .smallrow{color:#80868b}
+
+/* Canvas-first demo: all onboarding context lives in the agent sidebar.
+   Keep these elements in the DOM for current profile and wizard handlers,
+   but remove their presentation so comparisons start at the top. */
+main > header,
+main > .heading,
+main > .profile-banner {
+  display: none !important;
+}
+
+/* The toolbar now serves as the first visible canvas element. */
+main > .toolbar {
+  margin-top: 0 !important;
+  margin-bottom: 28px;
+}
+body.agent-sidebar-open main,
+body:not(.agent-sidebar-open) main {
+  padding-top: 26px;
+}
+@media (max-width:649px) {
+  body.agent-sidebar-open main,
+  body:not(.agent-sidebar-open) main {
+    padding-top: 20px;
+  }
+}
+
+
+/* Non-editable currency prefixes for all three budget values.
+   Numeric input retains normal select, paste, delete, and editing semantics. */
+main .input-head .budget-input-shell,
+#agent-controls .input-head .budget-input-shell{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex:0 1 62%;
+  width:min(62%,410px);
+  min-width:150px;
+  max-width:410px;
+  height:46px;
+  padding:0 8px;
+  background:#fff;
+  border:1px solid #dadce0;
+  border-radius:10px;
+  color:#202124;
+  box-sizing:border-box;
+  white-space:nowrap;
+  overflow:hidden;
+}
+main .input-head .budget-input-shell:focus-within,
+#agent-controls .input-head .budget-input-shell:focus-within{
+  border-color:#1a73e8;
+  outline:2px solid #d2e3fc;
+  outline-offset:1px;
+}
+main .input-head .budget-input-shell .budget-prefix,
+#agent-controls .input-head .budget-input-shell .budget-prefix{
+  display:block;
+  flex:0 0 auto;
+  color:#202124;
+  font-family:var(--font-display),var(--font-sans),sans-serif;
+  font-size:var(--text-h1,28px);
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:-.035em;
+  user-select:none;
+  pointer-events:none;
+}
+main .input-head .budget-input-shell .budget-value-input,
+#agent-controls .input-head .budget-input-shell .budget-value-input{
+  box-sizing:border-box;
+  display:block;
+  flex:1 1 0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:100%!important;
+  padding:0 1px 0 3px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  outline:0!important;
+  box-shadow:none!important;
+  text-align:right;
+  font-size:var(--text-h1,28px);
+  line-height:1.25;
+  font-weight:600;
+  font-variant-numeric:tabular-nums;
+}
+#agent-controls .input-head .budget-input-shell{
+  flex:0 0 55%;
+  width:55%;
+  min-width:0;
+  max-width:206px;
+  height:40px;
+  padding:0 7px;
+  background:#fff;
+  border-radius:9px;
+}
+#agent-controls .input-head .budget-input-shell .budget-prefix,
+#agent-controls .input-head .budget-input-shell .budget-value-input{
+  font-size:19px!important;
+  line-height:1.2!important;
+  letter-spacing:-.04em;
+  font-weight:600;
+}
+@media(max-width:649px){
+  main .input-head .budget-input-shell{flex:1 1 100%;width:100%;max-width:none;}
+  #agent-controls .input-head .budget-input-shell{flex:0 0 55%;width:55%;max-width:206px;}
+}
