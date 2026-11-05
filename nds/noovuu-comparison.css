@@ -1,0 +1,248 @@
+/* Comparison canvas: bounded and centered. The city strip is a SINGLE row
+   at every viewport width; never wrap or create a second grid row.
+   NDS sources remain strictly read-only. */
+.comparison-canvas{
+  box-sizing:border-box;
+  width:100%;
+  max-width:1440px;
+  min-width:0;
+  margin-inline:auto;
+}
+.comparison-canvas > .toolbar,
+.comparison-canvas > #selector,
+.comparison-canvas > #advanced-tabs,
+.comparison-canvas > #cards{max-width:100%;}
+.comparison-canvas .toolbar{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 24px!important;
+  min-width:0;
+}
+.comparison-canvas .toolbar .controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.comparison-canvas .compare-scroll-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex:0 0 auto;
+  border:1px solid #dadce0;
+  border-radius:999px;
+  background:#fff;
+  padding:4px;
+  white-space:nowrap;
+}
+.comparison-canvas .compare-scroll-controls button{
+  width:37px;
+  height:37px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:50%;
+  color:#1a73e8;
+  background:#f4f8ff;
+  font-size:27px;
+  line-height:1;
+  cursor:pointer;
+}
+.comparison-canvas .compare-scroll-controls button:hover:not(:disabled){
+  background:#e8f0fe;
+}
+.comparison-canvas .compare-scroll-controls button:disabled{
+  background:#f8f9fa;
+  color:#aeb4ba;
+  cursor:not-allowed;
+}
+.comparison-canvas #compare-position{
+  display:inline-block;
+  min-width:100px;
+  text-align:center;
+  color:#5f6368;
+  font-size:12px;
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+/* Override original 2-column, 4-column and mobile flex rules,
+   including the legacy important agent-docked media queries. */
+body #cards.layout,
+body.agent-sidebar-open #cards.layout,
+body:not(.agent-sidebar-open) #cards.layout{
+  box-sizing:border-box;
+  display:grid!important;
+  grid-template-columns:none!important;
+  grid-template-rows:minmax(0,auto)!important;
+  grid-auto-flow:column!important;
+  grid-auto-columns:minmax(338px,calc((100% - 60px) / 4))!important;
+  gap:20px!important;
+  width:100%;
+  margin:0!important;
+  padding:4px 2px 18px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:2px;
+  scrollbar-width:thin;
+  scrollbar-color:#bdc1c6 #f5f6f8;
+  touch-action:pan-x pan-y;
+}
+body #cards.layout > .city,
+body.agent-sidebar-open #cards.layout > .city,
+body:not(.agent-sidebar-open) #cards.layout > .city{
+  box-sizing:border-box;
+  min-width:0!important;
+  width:100%!important;
+  max-width:none!important;
+  flex:none!important;
+  scroll-snap-align:start;
+  align-self:stretch;
+  margin:0;
+}
+body #cards.layout > article.city.panel{
+  padding:26px;
+}
+body #cards.layout::-webkit-scrollbar{height:9px;display:block}
+body #cards.layout::-webkit-scrollbar-track{background:#f5f6f8;border-radius:999px}
+body #cards.layout::-webkit-scrollbar-thumb{background:#bdc1c6;border-radius:999px;border:2px solid #f5f6f8}
+body #cards.layout:focus-visible{
+  outline:2px solid #1a73e8;
+  outline-offset:4px;
+}
+.comparison-canvas #selector[hidden]{display:none!important}
+.comparison-canvas #selector{
+  display:flex;
+  flex-direction:column;
+  width:min(100%,640px);
+  padding:0;
+  gap:0;
+  margin:0 0 28px;
+  background:#fff;
+  border:1px solid #dadce0;
+  border-radius:17px;
+  box-shadow:0 4px 18px rgba(32,33,36,.06);
+  overflow:hidden;
+}
+.comparison-canvas .city-selection-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:22px 24px 13px;
+}
+.comparison-canvas .city-selection-header strong{
+  color:#202124;
+  font-size:17px;
+  font-weight:600;
+}
+.comparison-canvas .city-selection-header span{
+  font-size:12px;
+  font-weight:500;
+  color:#5f6368;
+}
+.comparison-canvas .city-selection-help{
+  padding:0 24px 18px;
+  font-size:12px;
+  line-height:1.6;
+  color:#5f6368;
+}
+.comparison-canvas .city-selection-options{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  padding:0 24px 22px;
+  max-height:330px;
+  overflow-y:auto;
+}
+.comparison-canvas .city-selection-options label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  margin:0;
+  padding:13px 14px;
+  background:#fff;
+  border:1px solid #dadce0;
+  border-radius:12px;
+  color:#202124;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+}
+.comparison-canvas .city-selection-options label:has(input:checked){
+  background:#f4f8ff;
+  border-color:#d2e3fc;
+}
+.comparison-canvas .city-selection-options label:has(input:disabled){cursor:default}
+.comparison-canvas .city-selection-options label input{
+  accent-color:#1a73e8;
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+}
+.comparison-canvas .city-selection-footer{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  padding:18px 24px;
+  background:#f8f9fa;
+  border-top:1px solid #e8eaed;
+}
+.comparison-canvas .city-selection-footer button{
+  min-width:104px;
+  min-height:43px;
+  padding:11px 20px;
+  border-radius:999px;
+  border:1px solid #dadce0;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+.comparison-canvas #city-compare-cancel{
+  background:#fff;
+  color:#3c4043;
+}
+.comparison-canvas #city-compare-save{
+  background:#1a73e8;
+  color:#fff;
+  border-color:#1a73e8;
+}
+.comparison-canvas #city-compare-save:hover{background:#1765cc}
+.comparison-canvas #city-compare-save:disabled{
+  background:#dce7f7;
+  border-color:#dce7f7;
+  color:#8a9aaf;
+  cursor:not-allowed;
+}
+@media(max-width:900px){
+  body #cards.layout,
+  body.agent-sidebar-open #cards.layout{
+    grid-auto-columns:minmax(300px,calc((100% - 40px) / 3))!important;
+    margin:0!important;
+  }
+}
+@media(max-width:649px){
+  .comparison-canvas .toolbar{gap:16px}
+  .comparison-canvas .compare-scroll-controls{max-width:100%}
+  .comparison-canvas #selector{width:100%}
+  .comparison-canvas .city-selection-options{grid-template-columns:1fr;padding:0 18px 18px;gap:8px}
+  .comparison-canvas .city-selection-header{padding:18px 18px 10px}
+  .comparison-canvas .city-selection-help{padding:0 18px 15px}
+  .comparison-canvas .city-selection-footer{padding:14px 18px}
+  body #cards.layout,
+  body.agent-sidebar-open #cards.layout{
+    grid-auto-columns:minmax(270px,calc(100% - 30px))!important;
+  }
+  body #cards.layout > article.city.panel{padding:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  body #cards.layout{scroll-behavior:auto!important}
+}
