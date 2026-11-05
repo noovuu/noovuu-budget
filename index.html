@@ -584,8 +584,9 @@ render();
 /* Standalone, no-backend onboarding: explicit inputs -> explainable illustrative city adjustments. */
 const fixedListKey='cost-of-life-fixed-items-v1';
 let fixedEntries=[];
-try{const saved=JSON.parse(localStorage.getItem(fixedListKey)||'null');if(Array.isArray(saved))fixedEntries=saved.filter(x=>x&&typeof x.name==='string'&&Number.isFinite(Number(x.amount))).map((x,i)=>({id:i+1,name:x.name,amount:Math.max(0,Number(x.amount))}));}catch{}
-if(!fixedEntries.length) fixedEntries=[{id:1,name:'Health insurance',amount:1000},{id:2,name:'Netflix',amount:20},{id:3,name:'LinkedIn',amount:50}];
+let loadedFixedEntries=false;
+try{const saved=JSON.parse(localStorage.getItem(fixedListKey)||'null');if(Array.isArray(saved)){loadedFixedEntries=true;fixedEntries=saved.filter(x=>x&&typeof x.name==='string'&&Number.isFinite(Number(x.amount))).map((x,i)=>({id:i+1,name:x.name,amount:Math.max(0,Number(x.amount))}));}}catch{}
+if(!loadedFixedEntries) fixedEntries=[{id:1,name:'Health insurance',amount:1000},{id:2,name:'Netflix',amount:20},{id:3,name:'LinkedIn',amount:50}];
 let fixedNextId=Math.max(0,...fixedEntries.map(x=>x.id))+1;
 const fixedSum=()=>Math.round(fixedEntries.reduce((a,x)=>a+(Number(x.amount)||0),0)*100)/100;
 function saveFixedEntries(){try{localStorage.setItem(fixedListKey,JSON.stringify(fixedEntries))}catch{}}
