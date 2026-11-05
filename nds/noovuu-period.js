@@ -71,7 +71,10 @@
       b.setAttribute('aria-pressed',String(b.dataset.periodUnit===data.unit));
     });
     const note=card.querySelector('.stay-assumption');
-    if(note)note.hidden=data.unit==='month';
+    if(note){
+      note.hidden=data.unit==='month';
+      note.textContent=stayAssumption(city);
+    }
     // The existing per-card refresh updates both KPI values, FX, meter,
     // pastel retention risk and annual summary (annual still monthly-based).
     if(typeof refreshAccommodationFinancials==='function')refreshAccommodationFinancials(city);
