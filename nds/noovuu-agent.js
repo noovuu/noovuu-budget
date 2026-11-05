@@ -28,6 +28,7 @@
     '<div class="agent-identity"><small>NOOVUU WORKSPACE</small><strong><span aria-hidden="true">✦</span> Your agent</strong></div>'+
     '<button id="agent-collapse" class="agent-icon-button" type="button" aria-label="Close agent sidebar" title="Close agent sidebar">‹</button>'+
    '</div>'+
+   '<div id="agent-scroll">'+
    '<section id="agent-controls" aria-label="Your budget adjustments">'+
     '<div class="agent-section-label"><span>Monthly budget</span><span>Live updates</span></div>'+
    '</section>'+
@@ -41,6 +42,7 @@
        '<div id="agent-messages" role="log" aria-live="polite" aria-relevant="additions"></div>'+
      '</div>'+
      '<div id="agent-builder-host" aria-label="Budget Builder experience"></div>'+
+   '</div>'+
    '</div>'+
    '<div class="agent-bottom">'+
      '<form id="agent-composer" aria-label="Message Noovuu agent">'+
@@ -63,6 +65,39 @@
   // Their original event listeners, range/value IDs, and local storage survive.
   agent.querySelector('#agent-controls').appendChild(financialPanel);
   agent.querySelector('#agent-builder-host').appendChild(onboarding);
+
+  // Reuse all four existing, fully wired input panels. Only regroup them.
+  // The budget defaults to a SINGLE income control. The other three real
+  // controls live under one chevron-operated region, not separate cards.
+  const inputs=financialPanel.querySelector('.inputs');
+  if(!inputs||inputs.children.length<4)throw new Error('Missing budget controls');
+  const extra=document.createElement('div');
+  extra.id='agent-budget-extra';
+  extra.hidden=true;
+  extra.setAttribute('aria-label','Additional budget settings');
+  while(inputs.children.length>1)extra.appendChild(inputs.children[1]);
+  inputs.appendChild(extra);
+  const heading=agent.querySelector('.agent-section-label');
+  financialPanel.insertBefore(heading,inputs);
+  const expand=document.createElement('button');
+  expand.id='agent-budget-expand';
+  expand.type='button';
+  expand.setAttribute('aria-controls','agent-budget-extra');
+  expand.setAttribute('aria-expanded','false');
+  expand.setAttribute('aria-label','Show all monthly budget settings');
+  expand.innerHTML='<span class="budget-chevron" aria-hidden="true"></span>';
+  heading.appendChild(expand);
+  function setBudgetExpanded(open){
+    const expanded=Boolean(open);
+    if(!expanded&&extra.contains(document.activeElement))expand.focus({preventScroll:true});
+    extra.hidden=!expanded;
+    financialPanel.classList.toggle('agent-budget-expanded',expanded);
+    expand.setAttribute('aria-expanded',String(expanded));
+    expand.setAttribute('aria-label',expanded?'Collapse monthly budget settings':'Show all monthly budget settings');
+    expand.title=expanded?'Collapse budget settings':'Expand budget settings';
+  }
+  expand.addEventListener('click',()=>setBudgetExpanded(extra.hidden));
+  setBudgetExpanded(false);
 
   // The builder is now an ordinary region in a docked sidebar, not a modal.
   onboarding.setAttribute('role','region');
@@ -202,8 +237,9 @@
     p.textContent=text;
     bubble.appendChild(p);
     messages.appendChild(bubble);
-    const chat=agent.querySelector('#agent-chat');
-    chat.scrollTop=chat.scrollHeight;
+    // One unified scroll zone for budget, builder and conversation.
+    const scroll=agent.querySelector('#agent-scroll');
+    if(scroll)scroll.scrollTop=scroll.scrollHeight;
   }
   function amountFrom(text){
     const match=text.match(/^\s*(?:(?:set|change|update|make)\s+(?:my\s+)?)?(income|salary|pay|take.home|rent|housing|fixed(?:\s+(?:expenses|costs))?)\s*(?:to|at|=|:)?\s*(?:C\$|US\$|MX\$|\$)?\s*([\d,]+(?:\.\d{1,2})?)\s*$/i);
