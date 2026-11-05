@@ -168,8 +168,20 @@
   function repositionSlot(x){
     const p=active;
     if(!p?.started||!p.card.isConnected)return;
-    const others=cards().filter(card=>card!==p.card);
-    const before=others.find(card=>x<card.getBoundingClientRect().left+card.getBoundingClientRect().width/2);
+    const list=cards(),others=list.filter(card=>card!==p.card);
+    // Compare against LOGICAL grid positions, not getBoundingClientRect()
+    // while FLIP animation is temporarily translating adjacent cards.
+    // This prevents the target from jittering back and forth mid-animation.
+    const stripRect=strip.getBoundingClientRect();
+    const css=getComputedStyle(strip);
+    const gap=parseFloat(css.columnGap)||20;
+    const leftPad=parseFloat(css.paddingLeft)||0;
+    const width=list[0]?.offsetWidth||list[0]?.getBoundingClientRect().width||320;
+    const origin=stripRect.left+strip.clientLeft+leftPad-strip.scrollLeft;
+    const before=others.find(card=>{
+      const logicalIndex=list.indexOf(card);
+      return x<origin+logicalIndex*(width+gap)+width/2;
+    });
     if(before?p.card.nextElementSibling===before:p.card===strip.lastElementChild)return;
     const oldRects=new Map(others.map(card=>[card,card.getBoundingClientRect().left]));
     if(before)strip.insertBefore(p.card,before);
