@@ -105,3 +105,28 @@ body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1f
 }
 #agent-controls .input-head .budget-value-input{background:#fff}
 #agent-controls .smallrow{color:#80868b}
+
+/* Canvas-first demo: all onboarding context lives in the agent sidebar.
+   Keep these elements in the DOM for current profile and wizard handlers,
+   but remove their presentation so comparisons start at the top. */
+main > header,
+main > .heading,
+main > .profile-banner {
+  display: none !important;
+}
+
+/* The toolbar now serves as the first visible canvas element. */
+main > .toolbar {
+  margin-top: 0 !important;
+  margin-bottom: 28px;
+}
+body.agent-sidebar-open main,
+body:not(.agent-sidebar-open) main {
+  padding-top: 26px;
+}
+@media (max-width:649px) {
+  body.agent-sidebar-open main,
+  body:not(.agent-sidebar-open) main {
+    padding-top: 20px;
+  }
+}
