@@ -672,7 +672,9 @@ function enhanceRendered(){
     input.min=String(displayValue(min));input.max=String(displayValue(max));input.step='any';input.value=String(displayValue(state[name]));
     const editable=document.getElementById(name+'Value');
     if(editable){
-      editable.setAttribute('aria-label',budgetInputLabels[name]+' in '+preferred+', editable amount');
+      editable.setAttribute('aria-label',name==='fixed'
+        ? 'Calculated fixed monthly expenses in '+preferred+', read only. Use Edit fixed expenses to change this total.'
+        : budgetInputLabels[name]+' in '+preferred+', editable amount');
       const prefix=editable.parentElement.querySelector('.budget-prefix');
       if(prefix)prefix.textContent=currencies[preferred].trimEnd();
       if(document.activeElement!==editable)editable.value=formatBudgetEntry(state[name]);
