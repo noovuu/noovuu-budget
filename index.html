@@ -251,7 +251,7 @@ function accommodationCurrency(){
 function parseAccommodationAmount(raw){
  // Reject empty / invalid input rather than silently using 0 or old rent.
  const clean=String(raw).trim().replace(/[^0-9.-]/g,'');
- if(!/^(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(clean))return null;
+ if(!/^(?:[0-9]+(?:[.][0-9]*)?|[.][0-9]+)$/.test(clean))return null;
  const n=Number(clean);
  return Number.isFinite(n)&&n>=0&&n<=1e12?n:null;
 }
