@@ -205,3 +205,43 @@
 @media(prefers-reduced-motion:reduce){
   #cards .accommodations-lock *{transition:none!important}
 }
+
+/* Keep the equivalent in view and provide a real Enter action.
+   Lock remains the separate choice to preserve that amount globally. */
+#cards .accommodations-value-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:11px;
+}
+#cards .accommodations-value-actions .accommodations-local{
+  margin:0;
+  flex:1 1 130px;
+}
+#cards .accommodations-apply{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:75px;
+  min-height:36px;
+  padding:8px 16px;
+  border:1px solid #1a73e8;
+  border-radius:999px;
+  background:#1a73e8;
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.3;
+  cursor:pointer;
+}
+#cards .accommodations-apply:hover:not(:disabled){background:#1558b0}
+#cards .accommodations-apply:focus-visible{outline:2px solid #1a73e8;outline-offset:3px}
+#cards .accommodations-apply:disabled{
+  background:#e8f0fe;
+  border-color:#d2e3fc;
+  color:#185abc;
+  cursor:not-allowed;
+}
