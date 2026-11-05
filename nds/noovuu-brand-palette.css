@@ -239,3 +239,117 @@ main .profile-banner,
 @media(prefers-reduced-motion:reduce){
   body input[type="range"],#cards .meter .used,#cards .meter .left{transition:none!important;}
 }
+
+
+/* City accommodations action row — exact component-sized controls.
+   From left to right: local equivalent | Lock switch | 12px | Enter.
+   The entire Lock pill is the switch, rather than a tiny switch nested
+   inside another button. Narrow cards can wrap the whole button group
+   below the local equivalent, but never separate Lock from Enter. */
+#cards .accommodations-value-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  column-gap:14px;
+  row-gap:12px;
+  width:100%;
+  min-width:0;
+  margin-top:13px;
+}
+#cards .accommodations-value-actions .accommodations-local{
+  display:block;
+  flex:1 1 105px;
+  min-width:0;
+  margin:0;
+  font-size:14px;
+  line-height:1.45;
+}
+#cards .accommodations-action-group{
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:nowrap;
+  gap:12px;
+  min-width:0;
+  margin-left:auto;
+}
+#cards .accommodations-action-group .accommodations-lock,
+#cards .accommodations-action-group .accommodations-apply{
+  display:inline-flex;
+  box-sizing:border-box;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:center;
+  height:42px;
+  min-height:42px;
+  max-height:42px;
+  margin:0;
+  border:0!important;
+  border-radius:999px;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:0;
+  box-shadow:none!important;
+  white-space:nowrap;
+}
+#cards .accommodations-action-group .accommodations-lock{
+  gap:10px;
+  min-width:112px;
+  padding:7px 16px 7px 9px;
+  background:#dee6ed!important;
+  color:#425566!important;
+  cursor:pointer;
+}
+#cards .accommodations-action-group .accommodations-lock::before{
+  content:"";
+  box-sizing:border-box;
+  display:block;
+  flex:0 0 27px;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(32,50,61,.15);
+}
+#cards .accommodations-action-group .accommodations-lock[aria-checked="true"]{
+  background:var(--noovuu-blue)!important;
+  color:var(--noovuu-action-text)!important;
+}
+#cards .accommodations-action-group .accommodations-lock[aria-checked="true"]::before{
+  background:#557b96;
+  box-shadow:inset 0 0 0 7px #fff;
+}
+#cards .accommodations-action-group .accommodations-lock:hover{
+  filter:brightness(.975);
+}
+#cards .accommodations-action-group .accommodations-apply{
+  min-width:85px;
+  padding:8px 19px;
+  background:var(--noovuu-blue)!important;
+  color:var(--noovuu-action-text)!important;
+}
+#cards .accommodations-action-group .accommodations-apply:disabled{
+  background:#e4e9ee!important;
+  color:#6f7d89!important;
+  cursor:not-allowed;
+}
+#cards .accommodations-action-group .accommodations-lock:focus-visible,
+#cards .accommodations-action-group .accommodations-apply:focus-visible{
+  outline:2px solid #799bb4!important;
+  outline-offset:3px;
+}
+#cards .accommodations-tile .accommodations-hint{
+  margin-top:15px;
+}
+@media(max-width:490px){
+  #cards .accommodations-action-group .accommodations-lock,
+  #cards .accommodations-action-group .accommodations-apply{
+    height:40px;
+    min-height:40px;
+    max-height:40px;
+  }
+}
