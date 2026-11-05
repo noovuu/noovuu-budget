@@ -1,0 +1,369 @@
+/* NOOVUU / UNIFIED INPUT LANGUAGE
+   Inspired by the editable Accommodations amount, applied consistently to
+   budget values, fixed expenses, the wizard, city cards, search and chat.
+   Only interface adapters change; both NDS Figma files remain read-only. */
+:root{
+  --noovuu-input-line:#c7d5e8;
+  --noovuu-input-focus:#1a73e8;
+  --noovuu-input-hover:#8ca9cf;
+  --noovuu-input-text:#202124;
+  --noovuu-input-muted:#7b8794;
+}
+
+/* Text-bearing inputs get an open, single-underline treatment throughout
+   the application, including portalled modal/drawer content.
+   Checkboxes, radios, range controls, switches and hidden inputs are excluded. */
+body :is(input[type="text"],input[type="number"],input[type="search"],
+         input[type="email"],input[type="tel"],input[type="url"],
+         input[type="password"],input:not([type]),textarea,select)
+:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]){
+  box-sizing:border-box;
+  min-width:0;
+  min-height:44px;
+  padding:10px 2px 9px;
+  border:0!important;
+  border-bottom:1px dashed var(--noovuu-input-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--noovuu-input-text);
+  box-shadow:none!important;
+  outline:0!important;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:15px;
+  line-height:1.45;
+  font-weight:400;
+  transition:border-color .16s ease;
+}
+body :is(input[type="text"],input[type="number"],input[type="search"],
+         input[type="email"],input[type="tel"],input[type="url"],
+         input[type="password"],input:not([type]),textarea,select)
+:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):hover:not(:disabled):not([readonly]){
+  border-bottom-color:var(--noovuu-input-hover)!important;
+}
+body :is(input[type="text"],input[type="number"],input[type="search"],
+         input[type="email"],input[type="tel"],input[type="url"],
+         input[type="password"],input:not([type]),textarea,select)
+:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):focus-visible{
+  border-bottom:2px solid var(--noovuu-input-focus)!important;
+  padding-bottom:8px;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+body :is(input,textarea)::placeholder{
+  color:#9aa6b3;
+  opacity:1;
+}
+body :is(input[type="number"]):not(.accommodations-value){
+  font-variant-numeric:tabular-nums;
+}
+body :is(input[type="number"])::-webkit-outer-spin-button,
+body :is(input[type="number"])::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+body :is(input[type="number"]){-moz-appearance:textfield;}
+
+/* BUDGET SETTINGS — identical line, prefix and type scale in the sidebar.
+   Currency prefixes remain real, non-editable sibling elements. */
+#noovuu-agent #agent-controls .input-head .budget-input-shell{
+  display:inline-flex!important;
+  box-sizing:border-box;
+  flex:0 0 55%!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  gap:4px;
+  width:55%!important;
+  max-width:206px!important;
+  min-width:0!important;
+  height:46px!important;
+  min-height:46px;
+  padding:3px 1px 6px!important;
+  border:0!important;
+  border-bottom:1px dashed var(--noovuu-input-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell:focus-within{
+  border-bottom:2px solid var(--noovuu-input-focus)!important;
+  padding-bottom:5px!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-prefix,
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-value-input,
+#noovuu-agent #agent-controls .retention-target-panel .budget-prefix{
+  display:block;
+  font-family:var(--font-display,"Instrument Sans",sans-serif)!important;
+  font-size:clamp(21px,2.2vw,27px)!important;
+  line-height:1.14!important;
+  font-weight:500!important;
+  letter-spacing:-.045em!important;
+  color:var(--noovuu-input-text)!important;
+  font-variant-numeric:tabular-nums;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-prefix{
+  flex:0 0 auto!important;
+  user-select:none;
+  pointer-events:none;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-value-input{
+  box-sizing:border-box!important;
+  flex:1 1 0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:30px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+  text-align:right!important;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-value-input:focus-visible{
+  outline:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell .budget-value-input[readonly]{
+  color:var(--noovuu-input-text)!important;
+  cursor:default;
+  caret-color:transparent;
+}
+#noovuu-agent #agent-controls .input-head .budget-input-shell:hover:not(:focus-within){
+  border-bottom-color:var(--noovuu-input-hover)!important;
+}
+
+/* CITY ACCOMMODATIONS — the reference treatment stays consistent. */
+#cards .accommodations-money{
+  border-bottom:1px dashed var(--noovuu-input-line);
+  background:transparent!important;
+}
+#cards .accommodations-money:focus-within{
+  border-bottom:2px solid var(--noovuu-input-focus);
+}
+#cards .accommodations-money input.accommodations-value,
+#cards .accommodations-money input.accommodations-value:hover:not([readonly]),
+#cards .accommodations-money input.accommodations-value:focus-visible{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* ITEMIZED FIXED EXPENSES — the name and CAD amount follow the same
+   minimal language in the modal AND the onboarding budget builder. */
+.fixed-edit-card .fixed-entry{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(135px,34%) 34px;
+  column-gap:16px;
+  row-gap:12px;
+  align-items:end;
+  margin:0;
+  padding:16px 0;
+  border-bottom:1px solid #edf0f3;
+}
+.fixed-edit-card .fixed-entry:last-child{
+  border-bottom:0;
+}
+.fixed-edit-card .fixed-entry > label{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap:6px;
+  min-width:0;
+  width:100%;
+  margin:0;
+}
+.fixed-edit-card .fixed-entry > label > .fixed-small{
+  margin:0;
+  color:#6c7886;
+  font-size:12px;
+  font-weight:500;
+}
+.fixed-edit-card .fixed-entry [data-fixed-name]{
+  width:100%!important;
+  min-width:0;
+  min-height:43px;
+  font-size:15px;
+  font-weight:500;
+}
+.fixed-edit-card .noovuu-amount-field{
+  box-sizing:border-box;
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  width:100%;
+  min-width:0;
+  min-height:43px;
+  padding:7px 1px 6px;
+  border-bottom:1px dashed var(--noovuu-input-line);
+  background:transparent;
+}
+.fixed-edit-card .noovuu-amount-field:focus-within{
+  border-bottom:2px solid var(--noovuu-input-focus);
+  padding-bottom:5px;
+}
+.fixed-edit-card .noovuu-amount-prefix{
+  display:block;
+  flex:0 0 auto;
+  font-family:var(--font-display,"Instrument Sans",sans-serif);
+  font-size:22px;
+  line-height:1.15;
+  font-weight:500;
+  letter-spacing:-.035em;
+  color:var(--noovuu-input-text);
+  user-select:none;
+  pointer-events:none;
+}
+.fixed-edit-card input[data-fixed-amount]{
+  box-sizing:border-box;
+  display:block;
+  flex:1 1 0;
+  width:100%!important;
+  min-width:0!important;
+  min-height:29px;
+  height:auto;
+  margin:0;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  outline:0!important;
+  box-shadow:none!important;
+  text-align:right;
+  color:var(--noovuu-input-text);
+  font-family:var(--font-display,"Instrument Sans",sans-serif);
+  font-size:22px;
+  line-height:1.15;
+  letter-spacing:-.035em;
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+.fixed-edit-card input[data-fixed-amount]:focus-visible{
+  outline:0!important;
+  box-shadow:none!important;
+}
+.fixed-edit-card .fixed-entry [data-fixed-remove]{
+  width:34px;
+  height:38px;
+  border:1px solid #e2e6ec;
+  border-radius:10px;
+}
+.fixed-edit-card .fixed-total{
+  gap:16px;
+  font-weight:500;
+}
+.fixed-edit-card .fixed-total strong{
+  font-family:var(--font-display,"Instrument Sans",sans-serif);
+  font-size:clamp(22px,2.2vw,27px);
+  font-weight:500;
+  letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* BUILDER / MODAL — spacious forms, clear labels, open baselines. */
+#onboarding :is(.wz-field input,.wz-field select,.wz-field textarea),
+.fixed-modal :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  padding:12px 2px 10px;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#onboarding .wz-field label,
+.fixed-modal label .fixed-small{
+  margin-bottom:6px;
+  color:#5f6368;
+  line-height:1.5;
+  font-weight:500;
+}
+#onboarding :is(.wz-field textarea,.wz-field input,.wz-field select):focus-visible,
+.fixed-modal :is(input,textarea,select):focus-visible{
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+/* CITY DETAIL numeric inputs and optional stay address. */
+#cards .details input[type="number"],
+#cards input[data-city][type="number"]{
+  min-height:43px;
+  font-family:var(--font-display,"Instrument Sans",sans-serif);
+  font-size:17px;
+  font-weight:500;
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+#cards :is(input[type="text"]:not(.accommodations-value),input[type="search"]){
+  min-height:44px;
+  font-size:14px;
+}
+
+/* SEARCH POPUP — small type, same underline and focus state. */
+.comparison-canvas #selector.city-search-popover #city-search-input{
+  min-height:45px;
+  border:0!important;
+  border-bottom:1px dashed var(--noovuu-input-line)!important;
+  border-radius:0!important;
+  padding:10px 2px;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.comparison-canvas #selector.city-search-popover #city-search-input:focus-visible{
+  border-bottom:2px solid var(--noovuu-input-focus)!important;
+  outline:0!important;
+}
+
+/* AGENT COMPOSER — preserve the pinned structure and controls; lighten the
+   message field so it reads as the same input family, not another framed card. */
+#noovuu-agent #agent-composer .agent-message-row{
+  border:0!important;
+  border-bottom:1px dashed var(--noovuu-input-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#noovuu-agent #agent-composer .agent-message-row:focus-within{
+  border-bottom:2px solid var(--noovuu-input-focus)!important;
+}
+#noovuu-agent #agent-message{
+  min-height:43px;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+}
+
+/* Navigation controls share the same line but retain compact sizing. */
+#noovuu-nav select{
+  min-height:35px;
+  padding:5px 18px 5px 2px;
+  font-size:12px;
+}
+
+/* Responsive expense modal: never crush a monetary value or its prefix. */
+@media(max-width:540px){
+  .fixed-edit-card .fixed-entry{
+    grid-template-columns:minmax(0,1fr) 34px;
+    column-gap:12px;
+  }
+  .fixed-edit-card .fixed-entry > label:nth-child(2){
+    grid-column:1;
+    grid-row:2;
+  }
+  .fixed-edit-card .fixed-entry > [data-fixed-remove]{
+    grid-column:2;
+    grid-row:2;
+    align-self:end;
+  }
+  .fixed-edit-card .noovuu-amount-field{max-width:100%;}
+}
+@media(prefers-reduced-motion:reduce){
+  body :is(input,select,textarea){transition:none!important;}
+}
