@@ -126,9 +126,10 @@ function showCityChoiceMessage(text){
 function renderCitySearchResults(filter){
  const results=document.getElementById('city-search-results');
  if(!results)return;
- const query=String(filter||'').toLocaleLowerCase().trim();
+ const normalized=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase().trim();
+ const query=normalized(filter);
  const available=Object.keys(defaults)
-  .filter(city=>!state.shown.includes(city)&&city.toLocaleLowerCase().includes(query));
+  .filter(city=>!state.shown.includes(city)&&normalized(city).includes(query));
  results.innerHTML=available.length
   ? available.map(city=>'<button type="button" class="city-search-option" data-add-city="'+escapeHtml(city)+'"><span>'+escapeHtml(city)+'</span><span aria-hidden="true">+</span></button>').join('')
   : '<p class="city-search-empty">'+(query?'No matching city in this prototype.':'All eight available cities are already selected.')+'</p>';
