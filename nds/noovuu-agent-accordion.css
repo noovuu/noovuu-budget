@@ -1,0 +1,186 @@
+/* Consolidated agent budget experience: one card, one scrolling viewport.
+   Budget inputs are the original interactive DOM nodes (not copies).
+   NDS / Figma files remain strictly read-only. */
+
+/* All content above the pinned composer belongs to ONE scroll container. */
+#noovuu-agent #agent-scroll{
+  box-sizing:border-box;
+  display:flex;
+  flex:1 1 0;
+  flex-direction:column;
+  min-height:0;
+  min-width:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior-y:contain;
+  scrollbar-width:thin;
+}
+#noovuu-agent #agent-controls,
+#noovuu-agent.agent-builder-active #agent-controls{
+  display:block;
+  box-sizing:border-box;
+  flex:0 0 auto!important;
+  width:100%;
+  min-height:0;
+  max-height:none!important;
+  padding:16px 16px 4px!important;
+  border-bottom:0!important;
+  overflow:visible!important;
+}
+#noovuu-agent #agent-body,
+#noovuu-agent.agent-builder-active #agent-body{
+  display:block;
+  box-sizing:border-box;
+  flex:0 0 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#noovuu-agent #agent-chat{
+  box-sizing:border-box;
+  display:flex;
+  flex:0 0 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:16px 17px 23px;
+}
+#noovuu-agent.agent-builder-active #agent-chat{display:none!important;}
+#noovuu-agent.agent-builder-active #agent-builder-host{
+  box-sizing:border-box;
+  display:block;
+  flex:0 0 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:0 14px 24px;
+}
+
+/* One outer container replaces the four isolated grey budget cards. */
+#noovuu-agent #agent-controls > section.panel{
+  display:block;
+  box-sizing:border-box;
+  width:100%!important;
+  margin:0!important;
+  padding:15px 14px 12px!important;
+  border:1px solid #e2e6eb!important;
+  border-radius:17px!important;
+  background:#f8f9fa!important;
+  box-shadow:none!important;
+}
+#noovuu-agent #agent-controls .agent-section-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:9px;
+  margin:0 0 9px;
+  padding:0 0 10px;
+  border-bottom:1px solid #e3e6ec;
+  color:#202124;
+  font-size:13px;
+  font-weight:600;
+}
+#noovuu-agent #agent-controls .agent-section-label span:nth-child(2){
+  margin-left:auto;
+  color:#80868b;
+  font-size:11px;
+  font-weight:400;
+}
+#noovuu-agent #agent-budget-expand{
+  display:inline-flex;
+  flex:0 0 33px;
+  align-items:center;
+  justify-content:center;
+  width:33px;
+  height:33px;
+  margin-left:1px;
+  padding:0;
+  border:1px solid #e0e4e9;
+  border-radius:10px;
+  background:#fff;
+  color:#3c4043;
+  cursor:pointer;
+}
+#noovuu-agent #agent-budget-expand:hover{background:#e8f0fe;border-color:#bed7ff;}
+#noovuu-agent #agent-budget-expand:focus-visible{
+  outline:2px solid #1a73e8;
+  outline-offset:2px;
+}
+#noovuu-agent #agent-budget-expand .budget-chevron{
+  display:block;
+  width:9px;
+  height:9px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translate(-1px,-1px);
+  transition:transform .15s ease;
+}
+#noovuu-agent #agent-budget-expand[aria-expanded="true"] .budget-chevron{
+  transform:rotate(225deg) translate(-1px,-1px);
+}
+
+/* Income is always visible; accommodations, fixed, retention form one group. */
+#noovuu-agent #agent-controls .inputs{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:0!important;
+  margin:0!important;
+}
+#noovuu-agent #agent-controls .inputs > div:first-child,
+#noovuu-agent #agent-controls #agent-budget-extra > div{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  margin:0!important;
+  padding:14px 0 17px!important;
+  border:0!important;
+  border-bottom:1px solid #e1e5ea!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+#noovuu-agent #agent-controls .inputs > div:first-child{
+  padding:7px 0 5px!important;
+  border-bottom:0!important;
+}
+#noovuu-agent #agent-controls .inputs > #agent-budget-extra{
+  box-sizing:border-box;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  gap:0!important;
+  width:100%;
+  margin:0!important;
+  padding:6px 0 0!important;
+  border:0!important;
+  border-top:1px solid #e1e5ea!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+#noovuu-agent #agent-controls #agent-budget-extra[hidden]{
+  display:none!important;
+}
+#noovuu-agent #agent-controls #agent-budget-extra > div:last-child{
+  padding-bottom:4px!important;
+  border-bottom:0!important;
+}
+/* Keep retention mode/summary and itemization fully visible when expanded. */
+#noovuu-agent #agent-budget-extra .retention-target-panel,
+#noovuu-agent #agent-budget-extra .retention-mode{
+  overflow:visible;
+}
+#noovuu-agent #agent-controls .inputs .input-head{margin:0 0 5px!important;}
+#noovuu-agent #agent-controls .fx-controls[id]{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+#noovuu-agent #agent-controls #retainSummary{
+  overflow:visible!important;
+  white-space:normal!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #noovuu-agent #agent-budget-expand .budget-chevron{transition:none!important;}
+}
