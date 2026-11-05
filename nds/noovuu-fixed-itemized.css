@@ -1,0 +1,74 @@
+/* Noovuu financial card refinements, November 2026.
+   The NDS Figma design-system sources remain read-only. */
+
+/* Accommodations uses exactly the same compact responsive typographic scale
+   and medium weight as Cost and Income Remaining, including the fixed C$ prefix. */
+#cards .accommodations-tile .accommodations-currency,
+#cards .accommodations-money input.accommodations-value{
+  font-family:var(--font-display);
+  font-size:clamp(26px,5.8cqw,32px);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+  line-height:1.14;
+  letter-spacing:-.045em;
+  color:#202124;
+}
+#cards .accommodations-money input.accommodations-value{
+  height:41px;
+  min-height:41px;
+}
+#cards .accommodations-money input.accommodations-value[readonly]{
+  color:#185abc;
+}
+
+/* Fixed expenses are summed ONLY from editable recurring-expense entries.
+   Remove every visible affordance that suggests the calculated total can be
+   changed directly. The original fixedValue element is readonly. */
+#noovuu-agent #agent-controls #fixedValue[readonly]{
+  cursor:default;
+  caret-color:transparent;
+}
+#noovuu-agent #agent-controls #fixedValue[readonly]:focus-visible{
+  outline:none;
+}
+#noovuu-agent #agent-controls .fixed-itemized-note{
+  display:block;
+  margin:12px 0 14px;
+  color:#66727f;
+  font-size:12px;
+  font-weight:400;
+  line-height:1.6;
+  white-space:normal;
+}
+#noovuu-agent #agent-controls #openFixedEditor{
+  box-sizing:border-box;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  margin:4px 0 7px!important;
+  padding:12px 20px!important;
+  border:1px solid #1a73e8!important;
+  border-radius:999px!important;
+  background:#1a73e8!important;
+  color:#fff!important;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:13px!important;
+  font-weight:600!important;
+  line-height:1.35;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color .15s,border-color .15s;
+}
+#noovuu-agent #agent-controls #openFixedEditor:hover{
+  background:#1558b0!important;
+  border-color:#1558b0!important;
+}
+#noovuu-agent #agent-controls #openFixedEditor:focus-visible{
+  outline:2px solid #1a73e8!important;
+  outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce){
+  #noovuu-agent #agent-controls #openFixedEditor{transition:none!important;}
+}
