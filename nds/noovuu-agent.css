@@ -92,3 +92,16 @@ body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1f
 @media(max-width:649px){body.agent-sidebar-open main{padding:24px 16px 58px}body.agent-sidebar-open #cards.layout{display:flex!important;grid-template-columns:none!important;overflow-x:auto}#agent-controls{max-height:340px}#agent-body{max-height:290px}#agent-controls .input-head .budget-value-input{font-size:19px!important}}
 @media(max-width:490px){#noovuu-agent .agent-header{height:62px}#agent-controls{padding:12px 16px 8px}}
 @media(prefers-reduced-motion:reduce){#noovuu-agent,body.agent-sidebar-open main{transition:none!important}}
+
+/* Treat each budget adjustment as a distinct compact card. */
+#agent-controls .inputs{gap:9px!important}
+#agent-controls .inputs > div,
+#agent-controls .inputs > div:last-child{
+  margin:0;
+  padding:11px 12px 10px;
+  border:1px solid #e8eaed;
+  border-radius:12px;
+  background:#f8f9fa;
+}
+#agent-controls .input-head .budget-value-input{background:#fff}
+#agent-controls .smallrow{color:#80868b}
