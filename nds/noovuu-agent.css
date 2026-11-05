@@ -1,8 +1,8 @@
 /* Noovuu docked left agent workspace; Figma untouched. */
 :root{--agent-width:420px;--agent-nav-height:76px}
-#noovuu-scrim,body.noovuu-drawer-open #noovuu-scrim{display:none!important}
-body.noovuu-drawer-open{overflow:auto!important}
-body.wizard-active main,body:not(.wizard-active) main{display:block!important}
+body.agent-shell-ready #noovuu-scrim,body.agent-shell-ready.noovuu-drawer-open #noovuu-scrim{display:none!important}
+body.agent-shell-ready.noovuu-drawer-open{overflow:auto!important}
+body.agent-shell-ready.wizard-active main,body.agent-shell-ready:not(.wizard-active) main{display:block!important}
 #noovuu-agent{position:fixed;z-index:750;top:var(--agent-nav-height);bottom:0;left:0;width:var(--agent-width);max-width:100vw;height:calc(100dvh - var(--agent-nav-height));background:#fff;border-right:1px solid #e8eaed;display:flex;flex-direction:column;min-height:0;overflow:hidden;transition:transform .2s,visibility .2s;color:#202124}
 body:not(.agent-sidebar-open) #noovuu-agent{transform:translateX(-105%);visibility:hidden;pointer-events:none}
 body.agent-sidebar-open main{width:calc(100% - var(--agent-width));max-width:none!important;min-width:0;margin-left:var(--agent-width);margin-right:0;padding:36px 32px 96px;transition:margin-left .2s,width .2s}
