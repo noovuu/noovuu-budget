@@ -1,0 +1,238 @@
+/* Noovuu period selector — exact NDS Components Button/Outline small splitButton.
+   Figma source node: 1:11262
+   32px total height; medium 14px text; outline 1px rgba(0,0,0,.30),
+   full pill radius; leading padding 12px; 1px divider; 34px trailing
+   action with original 20px chevron SVG.
+   Sources are READ ONLY. The two SVG assets were exported unchanged
+   from Figma node 1:11267 and vector 1:11265. */
+
+#cards .city-card-header-trailing .city-period-control{
+  display:inline-flex;
+  position:relative;
+  flex:0 0 auto;
+  min-width:0;
+  isolation:isolate;
+  z-index:2;
+}
+#cards .city-period-control:has(.nds-period-popover:not([hidden])){
+  z-index:100;
+}
+#cards .city-period-control .nds-period-split{
+  box-sizing:border-box;
+  display:flex;
+  flex:0 0 auto;
+  align-items:stretch;
+  justify-content:center;
+  gap:0;
+  height:32px;
+  min-height:32px;
+  max-height:32px;
+  width:max-content;
+  min-width:0;
+  padding:0;
+  border:1px solid var(--color-button-outline-lightmode-border,rgba(0,0,0,.3));
+  border-radius:9999px;
+  background:var(--color-button-outline-lightmode-bg,transparent);
+  box-shadow:none;
+  overflow:hidden;
+  color:var(--color-button-outline-lightmode-content,#1c1c1c);
+}
+#cards .city-period-control .nds-period-split button{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  height:100%;
+  min-height:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  padding:6px 12px;
+  background:transparent;
+  color:inherit;
+  box-shadow:none;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:14px;
+  font-weight:500;
+  line-height:20px;
+  white-space:nowrap;
+  cursor:pointer;
+}
+#cards .city-period-control .nds-period-split button.nds-period-label{
+  padding-left:12px;
+  padding-right:12px;
+}
+#cards .city-period-control .nds-period-split button.nds-period-chevron{
+  flex:0 0 33px;
+  width:33px;
+  min-width:33px;
+  max-width:33px;
+  padding:5px 6px 5px 7px;
+}
+#cards .city-period-control .nds-period-divider{
+  display:block;
+  flex:0 0 1px;
+  width:1px;
+  min-width:1px;
+  max-width:1px;
+  height:32px;
+  min-height:32px;
+  max-height:32px;
+  margin:0;
+  padding:0;
+  object-fit:fill;
+  pointer-events:none;
+}
+#cards .city-period-control .nds-period-chevron img{
+  display:block;
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+  pointer-events:none;
+}
+#cards .city-period-control .nds-period-split button:hover{
+  background:var(--noovuu-card-fill,#f0f4f8);
+}
+#cards .city-period-control .nds-period-split button:focus-visible{
+  outline:2px solid #7faecb;
+  outline-offset:-2px;
+}
+#cards .city-period-control .nds-period-chevron[aria-expanded="true"]{
+  background:var(--noovuu-card-fill,#f0f4f8);
+}
+
+/* Compact NDS popover: select a unit and the number, with explanatory
+   prototype pricing context. Every city manages its own separate period. */
+#cards .city-period-control .nds-period-popover{
+  position:absolute;
+  top:calc(100% + 10px);
+  right:0;
+  z-index:180;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:250px;
+  max-width:min(250px,90vw);
+  min-width:0;
+  margin:0;
+  padding:16px;
+  background:#fff;
+  border:1px solid #e3e3e3;
+  border-radius:17px;
+  box-shadow:0 12px 28px rgba(29,43,55,.12);
+  color:#202124;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+}
+#cards .city-period-control .nds-period-popover[hidden],
+#cards .city-period-control .nds-period-quantity[hidden]{
+  display:none!important;
+}
+#cards .nds-period-popover-title{
+  font-size:13px;
+  font-weight:600;
+  line-height:1.35;
+  color:#364453;
+}
+#cards .nds-period-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:5px;
+  width:100%;
+}
+#cards .nds-period-options button{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:37px;
+  padding:7px 5px;
+  border:0;
+  border-radius:9px;
+  background:#f0f4f8;
+  color:#344453;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+}
+#cards .nds-period-options button[aria-pressed="true"],
+#cards .nds-period-options button:hover{
+  background:#bbe2ff;
+  color:#20323d;
+}
+#cards .nds-period-options button:focus-visible,
+#cards .nds-period-done:focus-visible{
+  outline:2px solid #84afcc;
+  outline-offset:2px;
+}
+#cards .nds-period-quantity{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  margin:0;
+  font-size:12px;
+  font-weight:500;
+  color:#5f6368;
+}
+#cards .nds-period-quantity input{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:37px;
+  margin:0;
+  padding:6px 3px 6px;
+  border:0!important;
+  border-bottom:1px dashed #b8cad8!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  outline:none;
+  background:transparent;
+  color:#202124;
+  font-size:19px;
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+  text-align:left;
+}
+#cards .nds-period-quantity input:focus-visible{
+  border-bottom:2px solid #84afcc!important;
+}
+#cards .nds-period-explainer{
+  margin:0;
+  padding:0;
+  font-size:11px;
+  line-height:1.55;
+  font-weight:400;
+  color:#7b8794;
+}
+#cards .nds-period-done{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  align-self:flex-end;
+  min-height:37px;
+  min-width:73px;
+  padding:8px 16px;
+  border:0;
+  border-radius:9999px;
+  background:#bbe2ff;
+  color:#20323d;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+#cards .stay-assumption{
+  margin:7px 0 13px;
+  font-family:var(--font-sans,"Instrument Sans",sans-serif);
+  font-size:11px;
+  line-height:1.5;
+  color:#7b8794;
+}
+#cards .stay-assumption[hidden]{display:none!important;}
+@media(max-width:649px){
+  #cards .city-card-header-trailing{gap:5px;}
+  #cards .nds-period-popover{right:0;}
+}
+@media(prefers-reduced-motion:reduce){
+  #cards .nds-period-popover *,
+  #cards .nds-period-split *{transition:none!important;}
+}
