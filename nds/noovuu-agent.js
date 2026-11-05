@@ -17,6 +17,7 @@
   const cancelWizard=document.getElementById('noovuu-cancel');
   const confirmDialog=document.getElementById('noovuu-confirm');
   if(!main||!nav||!originalBuilderLink||!onboarding||!financialPanel||!cancelWizard)return;
+  document.body.classList.add("agent-shell-ready");
 
   const key='noovuu-agent-sidebar-open-v1';
   const agent=document.createElement('aside');
@@ -78,6 +79,7 @@
     // Explicitly closed panels remain closed after reload; first-time default is open.
     panelOpen=localStorage.getItem(key)!=='closed';
   }catch(e){panelOpen=true;}
+  if(location.hash==='#budget-builder')panelOpen=true;
 
   function builderOpen(){
     return onboarding.getAttribute('aria-hidden')==='false';
@@ -160,6 +162,9 @@
     event.preventDefault();
     event.stopImmediatePropagation();
     togglePanel();
+  },true);
+  originalBuilderLink.addEventListener('keydown',function(e){
+    if(e.key===' '){e.preventDefault();togglePanel();}
   },true);
   collapse.addEventListener('click',requestClosePanel);
   tool.addEventListener('click',toggleBuilder);
