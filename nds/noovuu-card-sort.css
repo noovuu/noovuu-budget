@@ -1,0 +1,233 @@
+/* Noovuu comparison cards: defined 1px borders, 28px corners, and
+   tactile drag/drop. This adapter does NOT edit the Figma NDS sources. */
+
+/* Override the prior app-level borderless-card rule for the TOP-LEVEL
+   comparison cards only. Nested filled financial tiles stay borderless. */
+body #cards.layout > article.city.panel,
+body.agent-sidebar-open #cards.layout > article.city.panel,
+body:not(.agent-sidebar-open) #cards.layout > article.city.panel,
+body #cards.layout > article.city.panel:hover{
+  box-sizing:border-box;
+  border:1px solid #e3e3e3!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+body #cards.layout > article.city.panel:focus-within:not(.city-drop-slot){
+  border-color:#e3e3e3!important;
+}
+/* Proper card headers: drag grip on left, title, then Monthly and 4-dot menu. */
+#cards .card-head.city-card-header{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  width:100%;
+  min-width:0;
+  margin:0;
+}
+#cards .city-card-heading{
+  display:flex;
+  flex:1 1 118px;
+  align-items:flex-start;
+  gap:9px;
+  min-width:0;
+}
+#cards .city-card-identity{
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  min-width:0;
+}
+#cards .city-card-identity .city-title{
+  margin:0;
+  padding:0;
+  overflow-wrap:break-word;
+}
+#cards .city-card-identity .country{
+  margin-top:8px;
+  white-space:normal;
+}
+#cards .city-card-header-trailing{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex:0 0 auto;
+  gap:7px;
+  min-width:0;
+  margin-left:auto;
+}
+#cards .city-card-header-trailing .tag{
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 auto;
+  min-height:30px;
+  white-space:nowrap;
+}
+#cards .city-drag-handle,
+#cards .city-card-more{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 34px;
+  width:34px;
+  height:36px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:11px;
+  background:transparent;
+  color:#8c99a6;
+  box-shadow:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+#cards .city-drag-handle{
+  touch-action:none;
+  cursor:grab;
+  margin-left:-7px;
+  margin-top:-2px;
+}
+#cards .city-drag-handle svg,
+#cards .city-card-more svg{
+  display:block;
+  flex:0 0 auto;
+  pointer-events:none;
+}
+#cards .city-drag-handle:hover,
+#cards .city-card-more:hover,
+#cards .city-card-more[aria-expanded="true"]{
+  background:#f0f4f8;
+  color:#465668;
+}
+#cards .city-drag-handle:focus-visible,
+#cards .city-card-more:focus-visible,
+#cards .city-card-menu button:focus-visible{
+  outline:2px solid #92bfe0;
+  outline-offset:2px;
+}
+#cards.city-sort-active{
+  scroll-snap-type:none!important;
+  cursor:grabbing;
+  user-select:none;
+}
+#cards.city-sort-active .city-drag-handle{
+  cursor:grabbing;
+}
+
+/* Menu popover is an actual usable control: Move left/right, Remove city. */
+#cards .city-menu-anchor{
+  position:relative;
+  flex:0 0 auto;
+}
+#cards .city-card-menu{
+  position:absolute;
+  z-index:150;
+  right:0;
+  top:calc(100% + 8px);
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  width:max-content;
+  min-width:185px;
+  max-width:230px;
+  margin:0;
+  padding:7px;
+  border:1px solid #e3e3e3;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(35,51,62,.10);
+}
+#cards .city-card-menu[hidden]{display:none!important;}
+#cards .city-card-menu button{
+  display:block;
+  width:100%;
+  min-height:38px;
+  padding:9px 12px;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  color:#344453;
+  font-size:13px;
+  line-height:1.35;
+  font-weight:500;
+  text-align:left;
+  cursor:pointer;
+}
+#cards .city-card-menu button:hover:not(:disabled){
+  background:#f0f4f8;
+}
+#cards .city-card-menu button:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+
+/* While moving, the original card becomes an unambiguous, softly lit
+   DROP ZONE. Its dimensions are kept, so neighboring cards can animate
+   out of the way without reflowing to another row. */
+body #cards.layout > article.city.panel.city-drop-slot{
+  position:relative;
+  border:2px dashed #a7cce4!important;
+  border-radius:28px!important;
+  background:#f0f4f8!important;
+  box-shadow:inset 0 0 0 3px rgba(187,226,255,.22)!important;
+  scroll-snap-align:none;
+  pointer-events:none;
+}
+#cards .city.city-drop-slot > *{
+  visibility:hidden!important;
+}
+#cards .city.city-drop-slot::after{
+  content:"Drop here";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:inherit;
+  color:#6f94af;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:600;
+  visibility:visible!important;
+}
+body > .city-drag-preview{
+  position:fixed!important;
+  z-index:9999!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  border:1px solid #e3e3e3!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  box-shadow:0 24px 48px rgba(40,55,70,.20),0 7px 18px rgba(40,55,70,.11)!important;
+  opacity:.98;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  user-select:none;
+  contain:paint;
+  will-change:transform;
+}
+body > .city-drag-preview .city-card-menu{
+  display:none!important;
+}
+body.city-sorting{
+  cursor:grabbing;
+}
+
+/* Keep item sizes and user spacing intact on desktop/tablet/mobile. */
+@media(max-width:649px){
+  #cards .card-head.city-card-header{gap:8px;}
+  #cards .city-card-heading{gap:6px;}
+  #cards .city-card-header-trailing{gap:4px;}
+  #cards .city-drag-handle,
+  #cards .city-card-more{width:30px;height:33px;flex-basis:30px;}
+  #cards .city-drag-handle{margin-left:-5px;}
+}
+@media(prefers-reduced-motion:reduce){
+  #cards .city-drag-handle,
+  body > .city-drag-preview{
+    transition:none!important;
+  }
+}
