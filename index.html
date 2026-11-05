@@ -525,7 +525,7 @@ document.addEventListener('pointerdown',event=>{
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&!cityChoosePanel.hidden){event.preventDefault();closeCitySelector(true);}
 });
-document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;state.retention={mode:'percent',value:50};releaseUnlockedAccommodationDrafts();fixedEntries=[{id:fixedNextId++,name:'Other recurring expenses (estimate)',amount:1000}];syncFixedTotals();state.prices=structuredClone(defaults);render()};
+document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;state.retention={mode:'percent',value:50};releaseUnlockedAccommodationDrafts();/* Keep user-itemized fixed expense commitments unchanged. */state.prices=structuredClone(defaults);render()};
 // The retention target is a comparison benchmark, never a spending deduction.
 // Values are bounded on every input, including when income changes elsewhere.
 const retentionEntry=document.getElementById('retainValue');
