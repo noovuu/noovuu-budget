@@ -1,0 +1,241 @@
+/* Noovuu product visual palette — 2026-11.
+   Figma/NDS Foundations and Components are deliberately READ ONLY.
+   This final application-level stylesheet takes precedence over prototype CSS. */
+:root{
+  --noovuu-blue:#bbe2ff;
+  --noovuu-agent-green:#c4eed0;
+  --noovuu-card-fill:#f0f4f8;
+  --noovuu-action-text:#20323d;
+  --noovuu-amber:#f1cda2;
+  --noovuu-amber-soft:#fff3e5;
+  --noovuu-amber-ink:#9a6739;
+  --noovuu-rose:#e9b1b5;
+  --noovuu-rose-soft:#fbe9eb;
+  --noovuu-rose-ink:#a4545c;
+  --nx-soft:var(--noovuu-card-fill);
+  --nx-selected:var(--noovuu-blue);
+}
+
+/* Keep the top-level Agent action GREEN in all toggle states. */
+#noovuu-nav #noovuu-builder,
+#noovuu-nav #noovuu-builder[aria-current="page"],
+#noovuu-nav #noovuu-builder[aria-pressed="true"],
+#noovuu-nav #noovuu-builder[aria-pressed="false"],
+#noovuu-nav #noovuu-builder:hover{
+  background:var(--noovuu-agent-green)!important;
+  border-color:transparent!important;
+  color:var(--noovuu-action-text)!important;
+  box-shadow:none!important;
+}
+#noovuu-nav #noovuu-builder:focus-visible{
+  outline:2px solid #76b795!important;
+  outline-offset:3px;
+}
+
+/* All established PRIMARY BLUE actions become pastel blue with dark text. */
+#noovuu-agent #agent-controls #openFixedEditor,
+#noovuu-agent #agent-controls #openFixedEditor:hover,
+#cards .accommodations-apply,
+#cards .accommodations-apply:hover:not(:disabled),
+#agent-send,
+#agent-send:hover,
+#onboarding .wz-btn:not(.secondary),
+#onboarding .wz-btn:not(.secondary):hover:not(:disabled),
+.comparison-canvas .city-add-button:not(:disabled),
+.comparison-canvas .city-add-button:hover:not(:disabled),
+#cards.advanced .planning-address-controls button:not(.planning-address-clear),
+#cards.advanced .planning-address-controls button:not(.planning-address-clear):hover,
+#cards .resource-place button:not([disabled]),
+#cards .resource-place button:not([disabled]):hover,
+#cards .resource-empty button,
+#noovuu-agent #agent-tool-builder[aria-pressed="true"]{
+  background:var(--noovuu-blue)!important;
+  border-color:transparent!important;
+  color:var(--noovuu-action-text)!important;
+  box-shadow:none!important;
+}
+#onboarding .wz-choice.selected,
+#advanced-tabs button[aria-selected="true"],
+#cards .resource-category-tab[aria-pressed="true"],
+#agent-controls .retention-mode button[aria-pressed="true"],
+main .toolbar .toggle button.active,
+#noovuu-nav #noovuu-home[aria-current="page"],
+#noovuu-agent #agent-budget-expand[aria-expanded="true"],
+.comparison-canvas .city-search-option:hover,
+.comparison-canvas .city-search-option:focus-visible{
+  background:var(--noovuu-blue)!important;
+  border-color:transparent!important;
+  color:var(--noovuu-action-text)!important;
+  box-shadow:none!important;
+}
+#cards .accommodations-apply:disabled{
+  background:var(--noovuu-card-fill)!important;
+  color:#778591!important;
+}
+
+/* Sliders should have the same pale blue, including in the agent. */
+body input[type="range"],
+main input[type="range"],
+#agent-controls input[type="range"],
+#agent-controls .retention-target-panel input[type="range"],
+.comparison-canvas input[type="range"]{
+  accent-color:var(--noovuu-blue)!important;
+}
+body input[type="range"]::-webkit-slider-thumb{
+  background:var(--noovuu-blue);
+}
+body input[type="range"]::-moz-range-thumb{
+  background:var(--noovuu-blue);
+}
+#onboarding .wz-progress > div{
+  background:var(--noovuu-blue)!important;
+}
+/* Default financial bar is also the new blue. Exception: goal warnings. */
+#cards .city:not([data-retention-risk="warning"]):not([data-retention-risk="danger"]) .meter .used{
+  background:var(--noovuu-blue)!important;
+}
+#cards .city:not([data-retention-risk="warning"]):not([data-retention-risk="danger"]) .meter .left{
+  background:var(--noovuu-card-fill)!important;
+}
+
+/* Risk palette: gently tinted pastel amber / rose, never vivid system colors.
+   Both KPI number and progress segments read exactly the same risk state.
+   Never change the threshold logic: warning starts at <=110% of the target;
+   a shortfall of even one cent is danger. */
+#cards .city[data-retention-risk="warning"] .city-kpis .city-kpi-remaining .big{
+  color:var(--noovuu-amber-ink)!important;
+}
+#cards .city[data-retention-risk="warning"] .meter .used{
+  background:var(--noovuu-amber)!important;
+}
+#cards .city[data-retention-risk="warning"] .meter .left{
+  background:var(--noovuu-amber-soft)!important;
+}
+#cards .city[data-retention-risk="warning"] .retention-status,
+#cards .city .retention-status[data-status="warning"]{
+  color:var(--noovuu-amber-ink)!important;
+}
+#cards .city[data-retention-risk="danger"] .city-kpis .city-kpi-remaining .big{
+  color:var(--noovuu-rose-ink)!important;
+}
+#cards .city[data-retention-risk="danger"] .meter .used{
+  background:var(--noovuu-rose)!important;
+}
+#cards .city[data-retention-risk="danger"] .meter .left{
+  background:var(--noovuu-rose-soft)!important;
+}
+#cards .city[data-retention-risk="danger"] .retention-status,
+#cards .city .retention-status[data-status="danger"]{
+  color:var(--noovuu-rose-ink)!important;
+}
+/* Validation errors follow that restrained rose family as well. */
+body input[aria-invalid="true"],
+body textarea[aria-invalid="true"]{
+  color:var(--noovuu-rose-ink)!important;
+  border-bottom-color:var(--noovuu-rose)!important;
+}
+#cards .accommodations-money:has(input[aria-invalid="true"]){
+  border-bottom-color:var(--noovuu-rose)!important;
+}
+
+/* Cards NEVER have perimeter outlines. They are distinguished by whitespace
+   and their fill; controls inside a card can still show keyboard focus. */
+main > section.panel,
+#cards > article.city.panel,
+#cards > article.city.panel:hover,
+#onboarding .wz-card,
+#noovuu-agent #onboarding .wz-card,
+#noovuu-agent #agent-controls > section.panel,
+#cards .stat,
+#cards .detail-summary > .stat,
+#cards .accommodations-tile,
+#cards .accommodations-tile.is-locked,
+main .profile-banner,
+.fixed-edit-card,
+#noovuu-agent #onboarding .fixed-edit-card,
+#cards .resource-place,
+#cards .resource-place.is-primary,
+#cards .resource-place.is-alternate,
+#cards .resource-empty,
+#cards .resource-category-links a,
+#cards .resources-map-frame,
+#cards .resource-interactive-map,
+#noovuu-agent .agent-chat-bubble,
+#noovuu-agent .agent-chat-user,
+#noovuu-confirm .noovuu-confirm-panel,
+.fixed-modal,
+.comparison-canvas #selector.city-search-popover{
+  border:0!important;
+  box-shadow:none!important;
+}
+/* The canvas cards stay open/white; their grouped financial tiles use
+   the supplied #f0f4f8 neutral fill rather than blue-grey tints. */
+#cards > article.city.panel,
+#cards > article.city.panel:hover{
+  background:#fff!important;
+}
+#noovuu-agent #agent-controls > section.panel,
+#cards .stat,
+#cards .detail-summary > .stat,
+#cards .accommodations-tile,
+#cards .accommodations-tile.is-locked,
+main .profile-banner,
+.fixed-edit-card,
+#noovuu-agent #onboarding .fixed-edit-card,
+#cards .resource-place,
+#cards .resource-place.is-primary,
+#cards .resource-place.is-alternate,
+#cards .resource-empty,
+#cards .resource-category-links a,
+#onboarding .wz-card,
+#noovuu-agent #onboarding .wz-card,
+#noovuu-agent .agent-chat-bubble,
+#noovuu-agent .agent-chat-user{
+  background:var(--noovuu-card-fill)!important;
+}
+/* Map is not tinted with a risk color. */
+#cards .resources-map-frame,
+#cards .resource-interactive-map{
+  background:var(--noovuu-card-fill)!important;
+}
+/* Dialog canvases stay white and legible against the overlay scrim. */
+#noovuu-confirm .noovuu-confirm-panel,
+.fixed-modal,
+.comparison-canvas #selector.city-search-popover{
+  background:#fff!important;
+}
+/* Selected choice panels are interactive states, not bordered cards. */
+#onboarding .wz-choice{
+  border:0!important;
+  background:var(--noovuu-card-fill)!important;
+}
+#onboarding .wz-choice.selected{
+  background:var(--noovuu-blue)!important;
+}
+#cards .accommodations-lock{
+  border-color:transparent!important;
+}
+#cards .accommodations-lock[aria-checked="true"]{
+  background:var(--noovuu-blue)!important;
+  color:var(--noovuu-action-text)!important;
+}
+#cards .accommodations-lock[aria-checked="true"] .accommodations-lock-track{
+  background:#9dc8e6!important;
+}
+#cards .accommodations-lock[aria-checked="true"] .accommodations-lock-thumb{
+  background:#20323d!important;
+}
+#cards .accommodations-tile .accommodations-money{
+  border-bottom-color:#c6d4e0!important;
+}
+
+/* Let pastel-filled actions remain visible on hover without introducing
+   the old cobalt palette or dark text reversal. */
+#noovuu-agent #agent-controls #openFixedEditor:hover,
+#cards .accommodations-apply:hover:not(:disabled),
+#agent-send:hover{
+  filter:brightness(.975);
+}
+@media(prefers-reduced-motion:reduce){
+  body input[type="range"],#cards .meter .used,#cards .meter .left{transition:none!important;}
+}
