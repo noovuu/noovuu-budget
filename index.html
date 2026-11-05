@@ -200,7 +200,107 @@ function render(){
  </section>
  <div class="stat stat-fixed"><span>Fixed monthly expenses</span><strong>${money(state.fixed)}</strong><span class="fx-inline">${localMoney(state.fixed,c)}</span></div>
  <div class="stat stat-annual"><span>Annual remaining</span><strong>${money(remaining*12)}</strong><span class="fx-inline">${localMoney(remaining*12,c)}</span></div></div><div class="advanced-only"><div class="expense-title">Monthly living expenses</div><p class="expense-meta">Fixed monthly expenses (${money(state.fixed)} / ${localMoney(state.fixed,c)}) are included in total spending. They are set globally above and do not change by city.</p>${fields.map(([key,label])=>`<label class="expense"><span>${label}</span><div class="expense-dual"><div><span class="pair-label">CAD</span><input type="number" min="0" step="5" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="CAD" value="${state.prices[c][key]}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, Canadian dollars"></div><div><span class="pair-label">${cityCurrencies[c]}</span><input type="number" min="0" step="any" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="${cityCurrencies[c]}" value="${(state.prices[c][key]*fxRates[cityCurrencies[c]].rate).toFixed(cityCurrencies[c]==='COP'?0:2)}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, ${cityCurrencies[c]}"></div></div></label>`).join('')}<p class="fx-rate">Reference: C$1 = ${fxRates[cityCurrencies[c]].rate.toLocaleString('en-CA')} ${cityCurrencies[c]} · ${fxRates[cityCurrencies[c]].date}.</p><p class="expense-meta">Enter an amount in CAD or local currency; the equivalent and all totals update automatically.</p></div></article>`}).join('')||'<div class="panel empty">Select a city to start comparing.</div>';document.getElementById('dots').innerHTML=state.shown.map(()=>'<span></span>').join('');renderCitySelector();save()}
-document.getElementById('income').oninput=e=>{state.income=+e.target.value;render()};document.getElementById('rent').oninput=e=>{state.rent=+e.target.value;render()};document.getElementById('fixed').oninput=e=>{setFixedFromSlider(+e.target.value)};document.getElementById('quick').onclick=()=>{state.advanced=false;render()};document.getElementById('advanced').onclick=()=>{state.advanced=true;render()};document.getElementById('cards').addEventListener('change',e=>{if(e.target.matches('input[data-city]')){let{city,field}=e.target.dataset;state.prices[city][field]=Math.max(0,(Number(e.target.value)||0)/(e.target.dataset.currency==='CAD'?1:fxRates[e.target.dataset.currency].rate));render()}});const cityChooseButton=document.getElementById('add');
+document.getElementById('income').oninput=e=>{state.income=+e.target.value;render()};document.getElementById('rent').oninput=e=>{state.rent=+e.target.value;render()};document.getElementById('fixed').oninput=e=>{setFixedFromSlider(+e.target.value)};document.getElementById('quick').onclick=()=>{state.advanced=false;render()};document.getElementById('advanced').onclick=()=>{state.advanced=true;render()};document.getElementById('cards').addEventListener('change',e=>{if(e.target.matches('input[data-city]')){let{city,field}=e.target.dataset;state.prices[city][field]=Math.max(0,(Number(e.target.value)||0)/(e.target.dataset.currency==='CAD'?1:fxRates[e.target.dataset.currency].rate));render()}});
+/* Accommodations are city-specific only after the user enters a local
+   estimate. Locking persists the city's number and protects it from the
+   global slider. Unlocking returns immediately to the global budget. */
+const accommodationCards=document.getElementById('cards');
+function refreshAccommodationFinancials(city){
+ const card=[...accommodationCards.querySelectorAll('.city')].find(node=>node.querySelector('.city-title')?.textContent===city);
+ if(!card)return;
+ const amount=accommodationForCity(city),total=spending(city),remaining=state.income-total;
+ const spentPercent=state.income>0?Math.min(100,Math.max(0,total/state.income*100)):0;
+ const big=card.querySelector('.big');
+ if(big){big.textContent=money(remaining);big.style.color=remaining<0?'#a74142':'';}
+ const fx=card.querySelector('.fx-line');
+ if(fx)fx.textContent=localMoney(remaining,city);
+ const meter=card.querySelector('.meter');
+ if(meter){
+   meter.setAttribute('aria-label',Math.round(spentPercent)+' percent of income spent');
+   const fill=meter.querySelector('.used');if(fill)fill.style.width=spentPercent+'%';
+ }
+ const spent=card.querySelector('.split > span:first-child');
+ if(spent){
+  const value=spent.querySelector('strong'),converted=spent.querySelector('.fx-inline');
+  if(value)value.textContent=money(total);
+  if(converted)converted.textContent=localMoney(total,city);
+ }
+ const retained=card.querySelector('.split > span:last-child');
+ if(retained)retained.textContent=(state.income>0?Math.round(remaining/state.income*100):0)+'% retained';
+ const annual=card.querySelector('.stat-annual');
+ if(annual){
+  const value=annual.querySelector('strong'),converted=annual.querySelector('.fx-inline');
+  if(value)value.textContent=money(remaining*12);
+  if(converted)converted.textContent=localMoney(remaining*12,city);
+ }
+ const local=card.querySelector('.accommodations-local');
+ if(local)local.textContent=localMoney(amount,city);
+ const hint=card.querySelector('.accommodations-hint');
+ if(hint&&!isAccommodationLocked(city)){
+  hint.textContent=state.accommodations[city]?'Custom estimate. Lock to protect it from global changes.':'Using your global accommodations budget. Enter a local estimate, then lock it.';
+ }
+}
+function updateAccommodationEntry(input){
+ const city=input.dataset.accommodationsCity;
+ if(!Object.hasOwn(defaults,city)||isAccommodationLocked(city))return;
+ const parsed=parseBudgetEntry(input.value);
+ if(parsed===null){input.setAttribute('aria-invalid','true');return;}
+ const amountCAD=cadValue(parsed);
+ if(!Number.isFinite(amountCAD)||amountCAD<0||amountCAD>1e9){
+  input.setAttribute('aria-invalid','true');return;
+ }
+ input.removeAttribute('aria-invalid');
+ state.accommodations[city]={amountCAD,locked:false};
+ refreshAccommodationFinancials(city);
+ save();
+}
+accommodationCards.addEventListener('focusin',event=>{
+ const input=event.target.closest('input[data-accommodations-city]');
+ if(input&&!input.readOnly)input.dataset.initialAmount=String(accommodationForCity(input.dataset.accommodationsCity));
+});
+accommodationCards.addEventListener('input',event=>{
+ const input=event.target.closest('input[data-accommodations-city]');
+ if(input)updateAccommodationEntry(input);
+});
+accommodationCards.addEventListener('focusout',event=>{
+ const input=event.target.closest('input[data-accommodations-city]');
+ if(!input)return;
+ input.removeAttribute('aria-invalid');
+ input.value=formatBudgetEntry(accommodationForCity(input.dataset.accommodationsCity));
+});
+accommodationCards.addEventListener('keydown',event=>{
+ const input=event.target.closest('input[data-accommodations-city]');
+ if(!input)return;
+ if(event.key==='Enter'){event.preventDefault();input.blur();}
+ if(event.key==='Escape'){
+  event.preventDefault();
+  const initial=Number(input.dataset.initialAmount);
+  if(Number.isFinite(initial)&&!isAccommodationLocked(input.dataset.accommodationsCity)){
+   const city=input.dataset.accommodationsCity;
+   if(initial===state.rent)delete state.accommodations[city];
+   else state.accommodations[city]={amountCAD:initial,locked:false};
+   refreshAccommodationFinancials(city);
+   save();
+  }
+  input.blur();
+ }
+});
+accommodationCards.addEventListener('click',event=>{
+ const button=event.target.closest('button[data-accommodations-lock]');
+ if(!button)return;
+ const city=button.dataset.accommodationsLock;
+ if(!Object.hasOwn(defaults,city))return;
+ if(isAccommodationLocked(city)){
+  delete state.accommodations[city]; // Return to global accommodations budget.
+ }else{
+  state.accommodations[city]={amountCAD:accommodationForCity(city),locked:true};
+ }
+ render();
+ const card=[...accommodationCards.querySelectorAll('.city')].find(node=>node.querySelector('.city-title')?.textContent===city);
+ card?.querySelector('[data-accommodations-lock]')?.focus({preventScroll:true});
+});
+
+const cityChooseButton=document.getElementById('add');
 const cityChoosePanel=document.getElementById('selector');
 document.getElementById('city-checkboxes').addEventListener('change',event=>{
  const input=event.target;
