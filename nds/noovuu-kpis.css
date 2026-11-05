@@ -1,0 +1,99 @@
+/* Noovuu city financial summary: two equal monthly KPIs, not cards.
+   NDS Figma sources remain strictly read-only. */
+#cards .city-kpis{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:48px;
+  align-items:start;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  margin:27px 0 24px;
+  container-type:inline-size;
+}
+#cards .city-kpis .city-kpi{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:7px;
+  min-width:0;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+#cards .city-kpis .city-kpi-label{
+  display:block;
+  min-height:36px;
+  margin:0;
+  color:#5f6368;
+  font-size:12px;
+  line-height:1.45;
+  letter-spacing:0;
+  font-weight:600;
+  white-space:normal;
+}
+#cards .city-kpis .city-kpi-value,
+#cards .city-kpis .big{
+  box-sizing:border-box;
+  display:block;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  font-family:var(--font-display,"Instrument Sans",sans-serif);
+  font-size:clamp(18px,5.8cqw,32px);
+  line-height:1.14;
+  letter-spacing:-.045em;
+  font-weight:600;
+  font-variant-numeric:tabular-nums;
+  color:#202124;
+  text-align:left;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+#cards .city-kpis .city-kpi-remaining .big{
+  color:#202124;
+}
+#cards .city-kpis .city-kpi-fx,
+#cards .city-kpis .fx-line{
+  box-sizing:border-box;
+  display:block;
+  margin:0;
+  padding:0;
+  max-width:100%;
+  color:#80868b;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:400;
+  font-variant-numeric:tabular-nums;
+  overflow-wrap:anywhere;
+  white-space:normal;
+}
+#cards .city .city-kpis + .meter{
+  margin:12px 0 10px;
+}
+#cards .city .meter + .split{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:0;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:500;
+  color:#687380;
+  font-variant-numeric:tabular-nums;
+}
+#cards .city .meter + .split .city-retained-percent{
+  text-align:right;
+}
+@media(max-width:649px){
+  #cards .city-kpis{margin:23px 0 20px;column-gap:48px;}
+  #cards .city-kpis .city-kpi-label{font-size:11px;min-height:34px;}
+  #cards .city-kpis .city-kpi-fx{font-size:10px;}
+}
