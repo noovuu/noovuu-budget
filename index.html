@@ -240,19 +240,26 @@ function refreshAccommodationFinancials(city){
   hint.textContent=state.accommodations[city]?'Custom estimate. Lock to protect it from global changes.':'Using your global accommodations budget. Enter a local estimate, then lock it.';
  }
 }
+// Commit the live field text, not a previously rendered or saved number.
+ // Return false when the current text cannot be used as a currency amount.
 function updateAccommodationEntry(input){
- const city=input.dataset.accommodationsCity;
- if(!Object.hasOwn(defaults,city)||isAccommodationLocked(city))return;
+ const city=input?.dataset?.accommodationsCity;
+ if(!city||!Object.hasOwn(defaults,city)||isAccommodationLocked(city))return false;
  const parsed=parseBudgetEntry(input.value);
- if(parsed===null){input.setAttribute('aria-invalid','true');return;}
- const amountCAD=cadValue(parsed);
- if(!Number.isFinite(amountCAD)||amountCAD<0||amountCAD>1e9){
-  input.setAttribute('aria-invalid','true');return;
+ const amountCAD=parsed===null?NaN:cadValue(parsed);
+ const valid=Number.isFinite(amountCAD)&&amountCAD>=0&&amountCAD<=1e9;
+ if(!valid){
+  input.setAttribute('aria-invalid','true');
+  const hint=input.closest('.accommodations-tile')?.querySelector('.accommodations-hint');
+  if(hint)hint.textContent='Enter a valid monthly amount before locking this city.';
+  return false;
  }
  input.removeAttribute('aria-invalid');
  state.accommodations[city]={amountCAD,locked:false};
- refreshAccommodationFinancials(city);
+ // Persist before updating the view, even if a decorative UI element fails.
  save();
+ refreshAccommodationFinancials(city);
+ return true;
 }
 accommodationCards.addEventListener('focusin',event=>{
  const input=event.target.closest('input[data-accommodations-city]');
@@ -260,13 +267,21 @@ accommodationCards.addEventListener('focusin',event=>{
 });
 accommodationCards.addEventListener('input',event=>{
  const input=event.target.closest('input[data-accommodations-city]');
- if(input)updateAccommodationEntry(input);
+ if(input)updateAccommodationEntry(input); // Update retained income while typing.
+});
+accommodationCards.addEventListener('change',event=>{
+ const input=event.target.closest('input[data-accommodations-city]');
+ if(input&&!input.readOnly)updateAccommodationEntry(input);
 });
 accommodationCards.addEventListener('focusout',event=>{
  const input=event.target.closest('input[data-accommodations-city]');
- if(!input)return;
- input.removeAttribute('aria-invalid');
- input.value=formatBudgetEntry(accommodationForCity(input.dataset.accommodationsCity));
+ if(!input||input.readOnly)return;
+ // Commit on blur before formatting. Otherwise a click on Lock could restore
+ // the previous amount (e.g. 750) and silently discard the user's 2,000.
+ if(updateAccommodationEntry(input)){
+  input.value=formatBudgetEntry(accommodationForCity(input.dataset.accommodationsCity));
+ }
+ // Invalid text remains visible and cannot be locked until corrected.
 });
 accommodationCards.addEventListener('keydown',event=>{
  const input=event.target.closest('input[data-accommodations-city]');
@@ -291,10 +306,19 @@ accommodationCards.addEventListener('click',event=>{
  const city=button.dataset.accommodationsLock;
  if(!Object.hasOwn(defaults,city))return;
  if(isAccommodationLocked(city)){
-  delete state.accommodations[city]; // Return to global accommodations budget.
+  delete state.accommodations[city]; // Unlock: resume the global budget.
  }else{
+  // Read the input on the SAME city card before destroying/re-rendering it.
+  // This is essential even if the user clicks Lock directly without pressing
+  // Enter or leaving the field.
+  const input=button.closest('.city')?.querySelector('input[data-accommodations-city]');
+  if(!input||!updateAccommodationEntry(input)){
+   input?.focus({preventScroll:true});
+   return; // Do not lock a stale value.
+  }
   state.accommodations[city]={amountCAD:accommodationForCity(city),locked:true};
  }
+ save(); // Save the lock state before any UI redraw.
  render();
  const card=[...accommodationCards.querySelectorAll('.city')].find(node=>node.querySelector('.city-title')?.textContent===city);
  card?.querySelector('[data-accommodations-lock]')?.focus({preventScroll:true});
