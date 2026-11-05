@@ -167,6 +167,10 @@
     if(e.key===' '){e.preventDefault();togglePanel();}
   },true);
   collapse.addEventListener('click',requestClosePanel);
+  // A map or chart inside the canvas must measure its new width after reflow.
+  agent.addEventListener('transitionend',function(e){
+    if(e.propertyName==='transform')window.dispatchEvent(new Event('resize'));
+  });
   tool.addEventListener('click',toggleBuilder);
 
   // The canvas' Edit lifestyle profile link should open the agent and the
