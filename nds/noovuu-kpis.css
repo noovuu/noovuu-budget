@@ -110,3 +110,48 @@
 #cards .retention-status[data-status="met"]{color:#246a50;}
 #cards .retention-status[data-status="below"]{color:#9d6216;}
 #cards .retention-status[data-status="neutral"]{color:#80868b;}
+
+
+/* Shared income-retention warning scale.
+   Status is calculated once using unrounded amounts and applied to each card;
+   both the Income Remaining KPI and the WHOLE progress meter agree. */
+#cards .city[data-retention-risk="warning"] .city-kpis .city-kpi-remaining .big{
+  color:#b96c08!important;
+}
+#cards .city[data-retention-risk="warning"] .meter .used{
+  background:#e49a22!important;
+}
+#cards .city[data-retention-risk="warning"] .meter .left{
+  background:#fde5b7!important;
+}
+#cards .city[data-retention-risk="danger"] .city-kpis .city-kpi-remaining .big{
+  color:#c53934!important;
+}
+#cards .city[data-retention-risk="danger"] .meter .used{
+  background:#d94c46!important;
+}
+#cards .city[data-retention-risk="danger"] .meter .left{
+  background:#f8cccc!important;
+}
+#cards .city .retention-status[data-status="warning"]{
+  color:#9a610d;
+  font-weight:600;
+}
+#cards .city .retention-status[data-status="danger"]{
+  color:#b42318;
+  font-weight:600;
+}
+#cards .city .retention-status[data-status="safe"]{
+  color:#246a50;
+}
+#cards .city .retention-status[data-status="neutral"]{
+  color:#80868b;
+}
+#cards .city .meter .used,
+#cards .city .meter .left{
+  transition:width .18s ease,background-color .18s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  #cards .city .meter .used,
+  #cards .city .meter .left{transition:none!important;}
+}
