@@ -85,7 +85,17 @@ body.noovuu-drawer-open #onboarding{transform:translateX(0);visibility:visible;p
 #noovuu-confirm button:focus-visible,#onboarding .drawer-cancel:focus-visible{outline:3px solid #86bda7;outline-offset:2px}
 @media(max-width:480px){#onboarding .noovuu-drawer-head .drawer-head-actions{gap:5px}#onboarding .noovuu-drawer-head .drawer-cancel{padding:10px 9px}#noovuu-confirm .noovuu-confirm-panel{padding:20px}}
 
-</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="./nds/nds-tokens.css?v=nds-2"><link rel="stylesheet" href="./nds/noovuu-components.css?v=nds-3"><link rel="stylesheet" href="./nds/noovuu-experience.css?v=google-2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous"><link rel="stylesheet" href="./nds/noovuu-resources.css?v=resources-2-1"><link rel="stylesheet" href="./nds/noovuu-agent.css?v=agent-3"><link rel="stylesheet" href="./nds/noovuu-comparison.css?v=compare-3"><link rel="stylesheet" href="./nds/noovuu-accommodations.css?v=accommodations-2"><link rel="stylesheet" href="./nds/noovuu-kpis.css?v=kpis-1"></head><body class="wizard-active"><section id="onboarding" aria-label="Lifestyle onboarding"><div class="wz-top"><div class="wz-identity"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">Your lifestyle, translated into numbers · Live update test ✓</span></div><div class="wz-card"><div class="wz-eyebrow" id="wz-counter">Step 1 of 7</div><div class="wz-progress"><div id="wz-bar"></div></div><div id="wz-content"></div><div class="wz-actions"><button id="wz-back" class="wz-btn secondary" type="button">Back</button><button id="wz-next" class="wz-btn" type="button">Continue →</button></div></div><div class="wz-disclaimer">Prototype only. Your answers are saved on this device, not sent to a service. The city prices and inferred estimates remain illustrative, and should not be mistaken for researched local retail prices.</div></section><main><header><div class="brand"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">NDS design system · Dual currency · Prototype</span></header><div class="heading"><div><h1>What would your life cost?</h1><p>Compare your money across cities using the same accommodations budget, location-independent fixed expenses and your own spending choices.</p></div></div><section class="panel" style="margin-top:20px"><div class="inputs"><div><div class="input-head"><label for="income">Monthly take-home pay</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="incomeValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Monthly take-home pay, editable amount" value="8,000"></span></div><div id="incomeFx" class="fx-controls" aria-live="polite"></div><input id="income" type="range" min="2000" max="16000" value="8000" step="250"><div class="smallrow"><span>C$2,000</span><span>C$16,000</span></div></div><div><div class="input-head"><label for="rent">Monthly accommodations budget</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="rentValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Monthly accommodations budget, editable amount" value="1,800"></span></div><div id="rentFx" class="fx-controls" aria-live="polite"></div><input id="rent" type="range" min="500" max="4000" value="1800" step="50"><div class="smallrow"><span>C$500</span><span>C$4,000</span></div></div><div><div class="input-head"><label for="fixed">Fixed Monthly Expenses</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="fixedValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Fixed monthly expenses, editable amount" value="1,000"></span></div><div id="fixedFx" class="fx-controls" aria-live="polite"></div><input id="fixed" type="range" min="0" max="5000" value="1000" step="50"><div class="smallrow"><span>C$0</span><span>C$5,000</span></div><div class="fx-controls">Insurance, subscriptions and recurring payments that remain the same in every city. Do not include these again under Entertainment &amp; other.</div><button class="fixed-link" type="button" id="openFixedEditor">Itemize fixed expenses ↗</button><div class="fx-controls">Slider changes are quick estimates; your saved itemized amounts are preserved until you edit them.</div></div></div></section><div class="profile-banner"><div><strong id="profileHeadline">Your lifestyle profile</strong><div class="sub" id="profileDetail">Personalized assumptions based on onboarding</div></div><button id="editProfile" type="button">Edit lifestyle profile</button></div><div class="comparison-canvas" id="comparison-canvas"><div class="toolbar"><div class="toggle" role="group" aria-label="View type"><button id="quick" class="active" aria-pressed="true">Quick View</button><button id="advanced" aria-pressed="false">Advanced View</button></div><div class="controls"><div id="compare-scroll-controls" class="compare-scroll-controls" role="group" aria-label="Move across city comparison columns"><button type="button" id="compare-prev" aria-label="Scroll one city to the left" title="Previous city">‹</button><span id="compare-position" aria-live="polite">Cities 1–4 of 4</span><button type="button" id="compare-next" aria-label="Scroll one city to the right" title="Next city">›</button></div><button class="reset" id="reset">Reset figures</button></div></div><div class="city-choice-row" id="city-choice-row" aria-label="Cities in your comparison">
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="./nds/nds-tokens.css?v=nds-2"><link rel="stylesheet" href="./nds/noovuu-components.css?v=nds-3"><link rel="stylesheet" href="./nds/noovuu-experience.css?v=google-2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous"><link rel="stylesheet" href="./nds/noovuu-resources.css?v=resources-2-1"><link rel="stylesheet" href="./nds/noovuu-agent.css?v=agent-3"><link rel="stylesheet" href="./nds/noovuu-comparison.css?v=compare-3"><link rel="stylesheet" href="./nds/noovuu-accommodations.css?v=accommodations-3"><link rel="stylesheet" href="./nds/noovuu-kpis.css?v=kpis-2"><link rel="stylesheet" href="./nds/noovuu-retention.css?v=retention-1"></head><body class="wizard-active"><section id="onboarding" aria-label="Lifestyle onboarding"><div class="wz-top"><div class="wz-identity"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">Your lifestyle, translated into numbers · Live update test ✓</span></div><div class="wz-card"><div class="wz-eyebrow" id="wz-counter">Step 1 of 7</div><div class="wz-progress"><div id="wz-bar"></div></div><div id="wz-content"></div><div class="wz-actions"><button id="wz-back" class="wz-btn secondary" type="button">Back</button><button id="wz-next" class="wz-btn" type="button">Continue →</button></div></div><div class="wz-disclaimer">Prototype only. Your answers are saved on this device, not sent to a service. The city prices and inferred estimates remain illustrative, and should not be mistaken for researched local retail prices.</div></section><main><header><div class="brand"><small>Personal lifestyle economics</small>Cost of Life</div><span class="chip">NDS design system · Dual currency · Prototype</span></header><div class="heading"><div><h1>What would your life cost?</h1><p>Compare your money across cities using the same accommodations budget, location-independent fixed expenses and your own spending choices.</p></div></div><section class="panel" style="margin-top:20px"><div class="inputs"><div><div class="input-head"><label for="income">Monthly take-home pay</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="incomeValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Monthly take-home pay, editable amount" value="8,000"></span></div><div id="incomeFx" class="fx-controls" aria-live="polite"></div><input id="income" type="range" min="2000" max="16000" value="8000" step="250"><div class="smallrow"><span>C$2,000</span><span>C$16,000</span></div></div><div><div class="input-head"><label for="rent">Monthly accommodations budget</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="rentValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Monthly accommodations budget, editable amount" value="1,800"></span></div><div id="rentFx" class="fx-controls" aria-live="polite"></div><input id="rent" type="range" min="500" max="4000" value="1800" step="50"><div class="smallrow"><span>C$500</span><span>C$4,000</span></div></div><div><div class="input-head"><label for="fixed">Fixed Monthly Expenses</label><span class="budget-input-shell"><span class="budget-prefix" aria-hidden="true">C$</span><input id="fixedValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Fixed monthly expenses, editable amount" value="1,000"></span></div><div id="fixedFx" class="fx-controls" aria-live="polite"></div><input id="fixed" type="range" min="0" max="5000" value="1000" step="50"><div class="smallrow"><span>C$0</span><span>C$5,000</span></div><div class="fx-controls">Insurance, subscriptions and recurring payments that remain the same in every city. Do not include these again under Entertainment &amp; other.</div><button class="fixed-link" type="button" id="openFixedEditor">Itemize fixed expenses ↗</button><div class="fx-controls">Slider changes are quick estimates; your saved itemized amounts are preserved until you edit them.</div></div>
+<div class="retention-target-panel">
+  <div class="input-head"><label for="retainValue">Monthly income to retain</label><span class="budget-input-shell"><span class="budget-prefix" id="retainPrefix" aria-hidden="true">%</span><input id="retainValue" class="budget-value-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Monthly income retention target" value="50"></span></div>
+  <div class="retention-mode" role="group" aria-label="Retention target unit">
+    <button type="button" id="retain-mode-money" aria-pressed="false">Dollar amount</button>
+    <button type="button" id="retain-mode-percent" aria-pressed="true">Percentage</button>
+  </div>
+  <div id="retainSummary" class="fx-controls retention-summary" aria-live="polite">Target: 50% of monthly income</div>
+  <input id="retain" type="range" min="0" max="100" value="50" step="1" aria-label="Monthly income to retain">
+  <div class="smallrow"><span id="retainMinimum">0%</span><span id="retainMaximum">100%</span></div>
+</div></div></section><div class="profile-banner"><div><strong id="profileHeadline">Your lifestyle profile</strong><div class="sub" id="profileDetail">Personalized assumptions based on onboarding</div></div><button id="editProfile" type="button">Edit lifestyle profile</button></div><div class="comparison-canvas" id="comparison-canvas"><div class="toolbar"><div class="toggle" role="group" aria-label="View type"><button id="quick" class="active" aria-pressed="true">Quick View</button><button id="advanced" aria-pressed="false">Advanced View</button></div><div class="controls"><div id="compare-scroll-controls" class="compare-scroll-controls" role="group" aria-label="Move across city comparison columns"><button type="button" id="compare-prev" aria-label="Scroll one city to the left" title="Previous city">‹</button><span id="compare-position" aria-live="polite">Cities 1–4 of 4</span><button type="button" id="compare-next" aria-label="Scroll one city to the right" title="Next city">›</button></div><button class="reset" id="reset">Reset figures</button></div></div><div class="city-choice-row" id="city-choice-row" aria-label="Cities in your comparison">
   <span class="city-choice-title">Cities</span>
   <div id="city-checkboxes" class="city-checkboxes" role="group" aria-label="Selected cities"></div>
   <div class="city-add-anchor">
@@ -105,7 +115,92 @@ const storeKey='cost-of-life-v2';let stored={};try{stored=JSON.parse(localStorag
 const requestedCities=Array.isArray(stored.shown)
   ? stored.shown.filter((city,i,arr)=>Object.hasOwn(defaults,city)&&arr.indexOf(city)===i).slice(0,8)
   : ['Barranquilla','Quito','Medellín','Córdoba'];
-const state={income:stored.income??8000,rent:stored.rent??1800,fixed:stored.fixed??1000,advanced:stored.advanced??false,shown:requestedCities,prices:structuredClone(defaults),accommodations:{}};
+const state={income:stored.income??8000,rent:stored.rent??1800,fixed:stored.fixed??1000,advanced:stored.advanced??false,shown:requestedCities,prices:structuredClone(defaults),accommodations:{},retention:{mode:'percent',value:50}};
+// A retention goal is a benchmark, NOT another monthly expense.
+// Dollar goals are stored in CAD; percentage goals scale with income.
+if(stored.retention&&typeof stored.retention==='object'){
+ const {mode,value}=stored.retention;
+ if((mode==='percent'||mode==='money')&&Number.isFinite(value)){
+  state.retention={mode,value:Math.max(0,mode==='percent'?Math.min(100,value):Math.min(Math.max(0,state.income),value))};
+ }
+}
+const retentionTargetCAD=()=>state.retention.mode==='percent'
+ ? Math.max(0,state.income)*state.retention.value/100
+ : state.retention.value;
+function clampRetentionGoal(){
+ const r=state.retention;
+ r.value=Math.max(0,Math.min(r.mode==='percent'?100:Math.max(0,state.income),Number(r.value)||0));
+}
+function retentionCurrency(){
+ const code=window.NoovuuCurrency||'CAD';
+ return code==='CAD'||Object.hasOwn(fxRates,code)?code:'CAD';
+}
+function retentionRate(){
+ const code=retentionCurrency();
+ return code==='CAD'?1:fxRates[code].rate;
+}
+function retentionCurrencyPrefix(){
+ return ({CAD:'C$',USD:'US$',MXN:'MX$',COP:'COP ',PEN:'S/ '})[retentionCurrency()];
+}
+function retentionDisplayAmount(amountCAD){
+ return (Number(amountCAD)||0)*retentionRate();
+}
+function retentionFormat(value){
+ return new Intl.NumberFormat('en-CA',{maximumFractionDigits:state.retention.mode==='percent'?2:(retentionCurrency()==='COP'?0:2)}).format(value);
+}
+function retentionStatusText(remaining){
+ const target=retentionTargetCAD();
+ if(target<=0)return 'No retention target set';
+ const difference=remaining-target;
+ return difference>=0?'At or above target by '+money(difference):'Below target by '+money(-difference);
+}
+function updateRetentionStatus(card,remaining){
+ const status=card?.querySelector('.retention-status');
+ if(!status)return;
+ const target=retentionTargetCAD();
+ status.textContent='Retain '+money(target)+' / month · '+retentionStatusText(remaining);
+ status.dataset.status=target<=0?'neutral':remaining>=target?'met':'below';
+}
+function renderRetentionControls(){
+ clampRetentionGoal();
+ const goal=state.retention;
+ const percent=goal.mode==='percent';
+ const prefix=document.getElementById('retainPrefix');
+ const entry=document.getElementById('retainValue');
+ const slider=document.getElementById('retain');
+ if(!entry||!slider)return;
+ const maxCAD=Math.max(0,state.income);
+ const cap=percent?100:retentionDisplayAmount(maxCAD);
+ const actual=percent?goal.value:retentionDisplayAmount(goal.value);
+ const safeCap=Math.max(0,cap);
+ const step=percent?1:'any';
+ slider.min='0';
+ slider.max=String(safeCap);
+ slider.step=step;
+ slider.value=String(Math.min(safeCap,actual));
+ entry.setAttribute('aria-label','Monthly income to retain in '+(percent?'percent':retentionCurrency()));
+ entry.setAttribute('aria-valuemin','0');
+ entry.setAttribute('aria-valuemax',String(safeCap));
+ entry.setAttribute('aria-valuenow',String(Math.min(safeCap,actual)));
+ if(document.activeElement!==entry)entry.value=retentionFormat(actual);
+ if(prefix)prefix.textContent=percent?'%':retentionCurrencyPrefix();
+ document.getElementById('retainMinimum').textContent=percent?'0%':retentionCurrencyPrefix()+'0';
+ document.getElementById('retainMaximum').textContent=percent?'100%':window.NoovuuMoney?window.NoovuuMoney(maxCAD):money(maxCAD);
+ document.getElementById('retain-mode-money').setAttribute('aria-pressed',String(!percent));
+ document.getElementById('retain-mode-percent').setAttribute('aria-pressed',String(percent));
+ const percentage=maxCAD>0?retentionTargetCAD()/maxCAD*100:0;
+ document.getElementById('retainSummary').textContent='Target '+money(retentionTargetCAD())+' per month · '+retentionFormat(percentage)+'% of take-home pay';
+}
+function setRetentionMode(next){
+ if(next!=='money'&&next!=='percent')return;
+ if(next===state.retention.mode)return;
+ const actual=retentionTargetCAD();
+ state.retention=next==='percent'
+  ?{mode:'percent',value:state.income>0?Math.min(100,actual/state.income*100):0}
+  :{mode:'money',value:Math.min(Math.max(0,state.income),actual)};
+ save();render();
+}
+
 // Per-city accommodation amounts are stored in CAD and remain separate
 // from the user's global monthly accommodations budget.
 for(const [city,record] of Object.entries(stored.accommodations||{})){
@@ -186,20 +281,21 @@ function openCitySelector(){
 }
 
 function render(){
+ clampRetentionGoal();
  if(state.rent!==lastGlobalAccommodationBudget){
   releaseUnlockedAccommodationDrafts();
   lastGlobalAccommodationBudget=state.rent;
  }
- document.getElementById('income').value=state.income;document.getElementById('rent').value=state.rent;document.getElementById('fixed').max=Math.max(5000,Math.ceil(state.fixed/500)*500);document.getElementById('fixed').value=state.fixed;syncBudgetValue('incomeValue',money(state.income));syncBudgetValue('rentValue',money(state.rent));syncBudgetValue('fixedValue',money(state.fixed));document.getElementById('incomeFx').textContent=fxSummary(state.income);document.getElementById('rentFx').textContent=fxSummary(state.rent);document.getElementById('fixedFx').textContent=fxSummary(state.fixed);document.getElementById('quick').classList.toggle('active',!state.advanced);document.getElementById('advanced').classList.toggle('active',state.advanced);document.getElementById('quick').setAttribute('aria-pressed',String(!state.advanced));document.getElementById('advanced').setAttribute('aria-pressed',String(state.advanced));const cards=document.getElementById('cards');cards.className='layout'+(state.advanced?' advanced':'');cards.dataset.cityCount=String(state.shown.length);cards.innerHTML=state.shown.map(c=>{const accommodationCAD=accommodationForCity(c),accommodationLocked=isAccommodationLocked(c),total=spending(c),remaining=state.income-total,pct=state.income>0?Math.min(100,Math.max(0,total/state.income*100)):0;return `<article class="city panel"><div class="card-head"><div><div class="city-title">${escapeHtml(c)}</div><div class="country">${escapeHtml(state.prices[c].country)} · ${cityCurrencies[c]} · 1 CAD = ${fxRates[cityCurrencies[c]].rate.toLocaleString('en-CA')}</div></div><span class="tag"><span class="dot"></span>Monthly</span></div><div class="city-kpis" role="group" aria-label="Monthly financial summary for ${escapeHtml(c)}"><div class="city-kpi city-kpi-cost"><span class="city-kpi-label">Cost</span><strong class="city-kpi-value cost-value">${money(total)}</strong><span class="city-kpi-fx cost-fx">${localMoney(total,c)}</span></div><div class="city-kpi city-kpi-remaining"><span class="city-kpi-label">Income Remaining</span><strong class="city-kpi-value big" style="color:${remaining<0?'#a74142':''}">${money(remaining)}</strong><span class="city-kpi-fx fx-line">${localMoney(remaining,c)}</span></div></div><div class="meter" role="img" aria-label="${Math.round(pct)} percent of income spent"><div class="used" style="width:${pct}%"></div><div class="left"></div></div><div class="split"><span class="city-spent-percent">${Math.round(pct)}% of income spent</span><span class="city-retained-percent">${state.income>0?Math.round(remaining/state.income*100):0}% retained</span></div><div class="detail-summary">
+ document.getElementById('income').value=state.income;document.getElementById('rent').value=state.rent;document.getElementById('fixed').max=Math.max(5000,Math.ceil(state.fixed/500)*500);document.getElementById('fixed').value=state.fixed;syncBudgetValue('incomeValue',money(state.income));syncBudgetValue('rentValue',money(state.rent));syncBudgetValue('fixedValue',money(state.fixed));document.getElementById('incomeFx').textContent=fxSummary(state.income);document.getElementById('rentFx').textContent=fxSummary(state.rent);document.getElementById('fixedFx').textContent=fxSummary(state.fixed);document.getElementById('quick').classList.toggle('active',!state.advanced);document.getElementById('advanced').classList.toggle('active',state.advanced);document.getElementById('quick').setAttribute('aria-pressed',String(!state.advanced));document.getElementById('advanced').setAttribute('aria-pressed',String(state.advanced));const cards=document.getElementById('cards');cards.className='layout'+(state.advanced?' advanced':'');cards.dataset.cityCount=String(state.shown.length);cards.innerHTML=state.shown.map(c=>{const accommodationCAD=accommodationForCity(c),accommodationLocked=isAccommodationLocked(c),total=spending(c),remaining=state.income-total,pct=state.income>0?Math.min(100,Math.max(0,total/state.income*100)):0;return `<article class="city panel"><div class="card-head"><div><div class="city-title">${escapeHtml(c)}</div><div class="country">${escapeHtml(state.prices[c].country)} · ${cityCurrencies[c]} · 1 CAD = ${fxRates[cityCurrencies[c]].rate.toLocaleString('en-CA')}</div></div><span class="tag"><span class="dot"></span>Monthly</span></div><div class="city-kpis" role="group" aria-label="Monthly financial summary for ${escapeHtml(c)}"><div class="city-kpi city-kpi-cost"><span class="city-kpi-label">Cost</span><strong class="city-kpi-value cost-value">${money(total)}</strong><span class="city-kpi-fx cost-fx">${localMoney(total,c)}</span></div><div class="city-kpi city-kpi-remaining"><span class="city-kpi-label">Income Remaining</span><strong class="city-kpi-value big" style="color:${remaining<0?'#a74142':''}">${money(remaining)}</strong><span class="city-kpi-fx fx-line">${localMoney(remaining,c)}</span></div></div><div class="meter" role="img" aria-label="${Math.round(pct)} percent of income spent"><div class="used" style="width:${pct}%"></div><div class="left"></div></div><div class="split"><span class="city-spent-percent">${Math.round(pct)}% of income spent</span><span class="city-retained-percent">${state.income>0?Math.round(remaining/state.income*100):0}% retained</span></div><div class="retention-status" data-status="${retentionTargetCAD()<=0?'neutral':remaining>=retentionTargetCAD()?'met':'below'}">Retain ${money(retentionTargetCAD())} / month · ${retentionStatusText(remaining)}</div><div class="detail-summary">
  <section class="stat accommodations-tile ${accommodationLocked?'is-locked':'is-unlocked'}" aria-label="Accommodations estimate for ${escapeHtml(c)}">
- <div class="accommodations-tile-head"><div class="accommodations-tile-copy"><span class="accommodations-tile-label">Accommodations</span><span class="accommodations-tile-subtitle">Monthly accommodations cost</span></div>
- <button type="button" class="accommodations-lock" role="switch" aria-checked="${accommodationLocked}" aria-label="${accommodationLocked?'Unlock':'Lock'} accommodations for ${escapeHtml(c)}" data-accommodations-lock="${escapeHtml(c)}"><span class="accommodations-lock-track" aria-hidden="true"><span class="accommodations-lock-thumb"></span></span><span class="accommodations-lock-text">${accommodationLocked?'Locked':'Lock'}</span></button></div>
+ <div class="accommodations-tile-head"><div class="accommodations-tile-copy"><span class="accommodations-tile-label">Accommodations</span><span class="accommodations-tile-subtitle">Monthly accommodations cost</span></div></div>
  <div class="accommodations-money"><span class="accommodations-currency" aria-hidden="true">C$</span><input class="accommodations-value" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" data-accommodations-city="${escapeHtml(c)}" aria-label="Monthly accommodations in ${escapeHtml(c)}, editable amount" value="${escapeHtml(money(accommodationCAD).replace(/^[^0-9.-]+/,''))}" ${accommodationLocked?'readonly':''}></div>
  <div class="accommodations-value-actions"><span class="fx-inline accommodations-local">${localMoney(accommodationCAD,c)}</span><button class="accommodations-apply" type="button" data-accommodations-apply="${escapeHtml(c)}" ${accommodationLocked?'disabled':''} aria-label="Enter and apply accommodations amount for ${escapeHtml(c)}">Enter</button></div>
  <p class="accommodations-hint">${accommodationLocked?'Locked for this city. Global accommodations changes will not affect it. Unlock to edit or resume the global budget.':(state.accommodations[c]?'Custom estimate. Lock to protect it from global changes.':'Using your global accommodations budget. Enter a local estimate, then lock it.')}</p>
+ <div class="accommodations-lock-row"><button type="button" class="accommodations-lock" role="switch" aria-checked="${accommodationLocked}" aria-label="${accommodationLocked?'Unlock':'Lock'} accommodations for ${escapeHtml(c)}" data-accommodations-lock="${escapeHtml(c)}"><span class="accommodations-lock-track" aria-hidden="true"><span class="accommodations-lock-thumb"></span></span><span class="accommodations-lock-text">${accommodationLocked?'Locked':'Lock'}</span></button></div>
  </section>
  <div class="stat stat-fixed"><span>Fixed monthly expenses</span><strong>${money(state.fixed)}</strong><span class="fx-inline">${localMoney(state.fixed,c)}</span></div>
- <div class="stat stat-annual"><span>Annual remaining</span><strong>${money(remaining*12)}</strong><span class="fx-inline">${localMoney(remaining*12,c)}</span></div></div><div class="advanced-only"><div class="expense-title">Monthly living expenses</div><p class="expense-meta">Fixed monthly expenses (${money(state.fixed)} / ${localMoney(state.fixed,c)}) are included in total spending. They are set globally above and do not change by city.</p>${fields.map(([key,label])=>`<label class="expense"><span>${label}</span><div class="expense-dual"><div><span class="pair-label">CAD</span><input type="number" min="0" step="5" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="CAD" value="${state.prices[c][key]}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, Canadian dollars"></div><div><span class="pair-label">${cityCurrencies[c]}</span><input type="number" min="0" step="any" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="${cityCurrencies[c]}" value="${(state.prices[c][key]*fxRates[cityCurrencies[c]].rate).toFixed(cityCurrencies[c]==='COP'?0:2)}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, ${cityCurrencies[c]}"></div></div></label>`).join('')}<p class="fx-rate">Reference: C$1 = ${fxRates[cityCurrencies[c]].rate.toLocaleString('en-CA')} ${cityCurrencies[c]} · ${fxRates[cityCurrencies[c]].date}.</p><p class="expense-meta">Enter an amount in CAD or local currency; the equivalent and all totals update automatically.</p></div></article>`}).join('')||'<div class="panel empty">Select a city to start comparing.</div>';document.getElementById('dots').innerHTML=state.shown.map(()=>'<span></span>').join('');renderCitySelector();save()}
+ <div class="stat stat-annual"><span>Annual remaining</span><strong>${money(remaining*12)}</strong><span class="fx-inline">${localMoney(remaining*12,c)}</span></div></div><div class="advanced-only"><div class="expense-title">Monthly living expenses</div><p class="expense-meta">Fixed monthly expenses (${money(state.fixed)} / ${localMoney(state.fixed,c)}) are included in total spending. They are set globally above and do not change by city.</p>${fields.map(([key,label])=>`<label class="expense"><span>${label}</span><div class="expense-dual"><div><span class="pair-label">CAD</span><input type="number" min="0" step="5" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="CAD" value="${state.prices[c][key]}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, Canadian dollars"></div><div><span class="pair-label">${cityCurrencies[c]}</span><input type="number" min="0" step="any" data-city="${escapeHtml(c)}" data-field="${key}" data-currency="${cityCurrencies[c]}" value="${(state.prices[c][key]*fxRates[cityCurrencies[c]].rate).toFixed(cityCurrencies[c]==='COP'?0:2)}" aria-label="${escapeHtml(label)} in ${escapeHtml(c)}, ${cityCurrencies[c]}"></div></div></label>`).join('')}<p class="fx-rate">Reference: C$1 = ${fxRates[cityCurrencies[c]].rate.toLocaleString('en-CA')} ${cityCurrencies[c]} · ${fxRates[cityCurrencies[c]].date}.</p><p class="expense-meta">Enter an amount in CAD or local currency; the equivalent and all totals update automatically.</p></div></article>`}).join('')||'<div class="panel empty">Select a city to start comparing.</div>';document.getElementById('dots').innerHTML=state.shown.map(()=>'<span></span>').join('');renderCitySelector();renderRetentionControls();save()}
 document.getElementById('income').oninput=e=>{state.income=+e.target.value;render()};document.getElementById('rent').oninput=e=>{state.rent=+e.target.value;render()};document.getElementById('fixed').oninput=e=>{setFixedFromSlider(+e.target.value)};document.getElementById('quick').onclick=()=>{state.advanced=false;render()};document.getElementById('advanced').onclick=()=>{state.advanced=true;render()};document.getElementById('cards').addEventListener('change',e=>{if(e.target.matches('input[data-city]')){let{city,field}=e.target.dataset;state.prices[city][field]=Math.max(0,(Number(e.target.value)||0)/(e.target.dataset.currency==='CAD'?1:fxRates[e.target.dataset.currency].rate));render()}});
 /* Accommodations are city-specific only after the user enters a local
    estimate. Locking persists the city's number and protects it from the
@@ -227,6 +323,7 @@ function refreshAccommodationFinancials(city){
  if(spent)spent.textContent=Math.round(spentPercent)+'% of income spent';
  const retained=card.querySelector('.city-retained-percent');
  if(retained)retained.textContent=(state.income>0?Math.round(remaining/state.income*100):0)+'% retained';
+ updateRetentionStatus(card,remaining);
  const annual=card.querySelector('.stat-annual');
  if(annual){
   const value=annual.querySelector('strong'),converted=annual.querySelector('.fx-inline');
@@ -400,7 +497,60 @@ document.addEventListener('pointerdown',event=>{
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&!cityChoosePanel.hidden){event.preventDefault();closeCitySelector(true);}
 });
-document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;releaseUnlockedAccommodationDrafts();fixedEntries=[{id:fixedNextId++,name:'Other recurring expenses (estimate)',amount:1000}];syncFixedTotals();state.prices=structuredClone(defaults);render()};render();
+document.getElementById('reset').onclick=()=>{state.income=8000;state.rent=1800;state.retention={mode:'percent',value:50};releaseUnlockedAccommodationDrafts();fixedEntries=[{id:fixedNextId++,name:'Other recurring expenses (estimate)',amount:1000}];syncFixedTotals();state.prices=structuredClone(defaults);render()};
+// The retention target is a comparison benchmark, never a spending deduction.
+// Values are bounded on every input, including when income changes elsewhere.
+const retentionEntry=document.getElementById('retainValue');
+const retentionSlider=document.getElementById('retain');
+const parseRetentionInput=text=>{
+ const raw=String(text).trim();
+ if(!raw||raw.includes('-'))return null;
+ const clean=raw.replace(/[^0-9.]/g,'');
+ if(!/^(?:[0-9]+(?:[.][0-9]*)?|[.][0-9]+)$/.test(clean))return null;
+ const num=Number(clean);
+ return Number.isFinite(num)?num:null;
+};
+function setRetentionFromVisibleAmount(text,source){
+ const amount=parseRetentionInput(text);
+ if(amount===null){
+  if(source==='entry')retentionEntry.setAttribute('aria-invalid','true');
+  return false;
+ }
+ retentionEntry.removeAttribute('aria-invalid');
+ const percentage=state.retention.mode==='percent';
+ const amountCAD=percentage?amount:amount/retentionRate();
+ const ceiling=percentage?100:Math.max(0,state.income);
+ const bounded=Math.max(0,Math.min(ceiling,amountCAD));
+ state.retention.value=bounded;
+ render();
+ // When the user exceeds their income or 100%, immediately display the cap.
+ if(source==='entry'&&Math.abs(bounded-amountCAD)>0.001){
+  retentionEntry.value=retentionFormat(percentage?bounded:retentionDisplayAmount(bounded));
+ }
+ return true;
+}
+retentionEntry.addEventListener('input',()=>setRetentionFromVisibleAmount(retentionEntry.value,'entry'));
+retentionEntry.addEventListener('change',()=>setRetentionFromVisibleAmount(retentionEntry.value,'entry'));
+retentionEntry.addEventListener('blur',()=>{
+ retentionEntry.removeAttribute('aria-invalid');
+ retentionEntry.value=retentionFormat(state.retention.mode==='percent'?state.retention.value:retentionDisplayAmount(state.retention.value));
+});
+retentionEntry.addEventListener('keydown',event=>{
+ if(event.key==='Enter'){
+  event.preventDefault();
+  setRetentionFromVisibleAmount(retentionEntry.value,'entry');
+  retentionEntry.blur();
+ }
+ if(event.key==='Escape'){
+  event.preventDefault();
+  retentionEntry.value=retentionFormat(state.retention.mode==='percent'?state.retention.value:retentionDisplayAmount(state.retention.value));
+  retentionEntry.blur();
+ }
+});
+retentionSlider.addEventListener('input',()=>setRetentionFromVisibleAmount(retentionSlider.value,'range'));
+document.getElementById('retain-mode-money').addEventListener('click',()=>setRetentionMode('money'));
+document.getElementById('retain-mode-percent').addEventListener('click',()=>setRetentionMode('percent'));
+render();
 </script>
 <script>
 /* Standalone, no-backend onboarding: explicit inputs -> explainable illustrative city adjustments. */

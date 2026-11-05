@@ -245,3 +245,23 @@
   color:#185abc;
   cursor:not-allowed;
 }
+
+/* Accommodations Lock now sits at the bottom-right, never over the title. */
+#cards .accommodations-tile-head{
+  justify-content:flex-start;
+  margin-bottom:20px;
+}
+#cards .accommodations-lock-row{
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  width:100%;
+  margin-top:auto;
+  padding-top:18px;
+}
+#cards .accommodations-lock-row .accommodations-lock{
+  position:static;
+  margin:0;
+}
