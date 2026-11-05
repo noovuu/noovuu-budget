@@ -15,8 +15,7 @@
    Checkboxes, radios, range controls, switches and hidden inputs are excluded. */
 body :is(input[type="text"],input[type="number"],input[type="search"],
          input[type="email"],input[type="tel"],input[type="url"],
-         input[type="password"],input:not([type]),textarea,select)
-:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]){
+         input[type="password"],input:not([type]),textarea,select):not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]){
   box-sizing:border-box;
   min-width:0;
   min-height:44px;
@@ -36,14 +35,12 @@ body :is(input[type="text"],input[type="number"],input[type="search"],
 }
 body :is(input[type="text"],input[type="number"],input[type="search"],
          input[type="email"],input[type="tel"],input[type="url"],
-         input[type="password"],input:not([type]),textarea,select)
-:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):hover:not(:disabled):not([readonly]){
+         input[type="password"],input:not([type]),textarea,select):not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):hover:not(:disabled):not([readonly]){
   border-bottom-color:var(--noovuu-input-hover)!important;
 }
 body :is(input[type="text"],input[type="number"],input[type="search"],
          input[type="email"],input[type="tel"],input[type="url"],
-         input[type="password"],input:not([type]),textarea,select)
-:not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):focus-visible{
+         input[type="password"],input:not([type]),textarea,select):not(.budget-value-input):not(.accommodations-value):not([data-fixed-amount]):focus-visible{
   border-bottom:2px solid var(--noovuu-input-focus)!important;
   padding-bottom:8px;
   outline:0!important;
@@ -363,6 +360,16 @@ body :is(input[type="number"]){-moz-appearance:textfield;}
     align-self:end;
   }
   .fixed-edit-card .noovuu-amount-field{max-width:100%;}
+  /* Builder already uses one explicit grid column at this breakpoint. */
+  #noovuu-agent #onboarding .fixed-edit-card .fixed-entry > label:nth-child(2){
+    grid-column:1;
+    grid-row:auto;
+  }
+  #noovuu-agent #onboarding .fixed-edit-card .fixed-entry > [data-fixed-remove]{
+    grid-column:1;
+    grid-row:auto;
+    justify-self:end;
+  }
 }
 @media(prefers-reduced-motion:reduce){
   body :is(input,select,textarea){transition:none!important;}
