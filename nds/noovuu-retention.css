@@ -1,0 +1,82 @@
+/* Noovuu retention goal — shared budget input in the permanent agent sidebar.
+   Figma NDS source assets remain strictly read-only. */
+#agent-controls .retention-target-panel{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+#agent-controls .retention-target-panel .input-head{margin-bottom:8px!important;}
+#agent-controls .retention-target-panel .input-head label{
+  font-size:12px!important;
+  font-weight:500!important;
+}
+#agent-controls .retention-target-panel .budget-input-shell{
+  min-width:0;
+}
+#agent-controls .retention-target-panel .budget-prefix{
+  font-size:19px!important;
+  font-weight:600;
+}
+#agent-controls .retention-mode{
+  display:inline-flex;
+  align-items:center;
+  align-self:flex-start;
+  gap:4px;
+  min-height:38px;
+  padding:4px;
+  margin:0 0 9px;
+  border:1px solid #dadce0;
+  border-radius:999px;
+  background:#fff;
+}
+#agent-controls .retention-mode button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:6px 12px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:#5f6368;
+  font-size:11px;
+  line-height:1.35;
+  font-weight:500;
+  cursor:pointer;
+  white-space:nowrap;
+}
+#agent-controls .retention-mode button[aria-pressed="true"]{
+  background:#e8f0fe;
+  color:#185abc;
+  font-weight:600;
+}
+#agent-controls .retention-mode button:focus-visible{
+  outline:2px solid #1a73e8;
+  outline-offset:2px;
+}
+#agent-controls .retention-target-panel #retainSummary{
+  display:block!important;
+  width:100%;
+  margin:0 0 7px!important;
+  padding:0;
+  color:#5f6368;
+  font-size:11px!important;
+  line-height:1.5!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+#agent-controls .retention-target-panel input[type="range"]{
+  margin:6px 0 4px;
+  accent-color:#1a73e8;
+}
+#agent-controls #retainValue[aria-invalid="true"]{color:#a74142!important;}
+#agent-controls .retention-target-panel .smallrow{
+  display:flex;
+  justify-content:space-between;
+  color:#80868b;
+  font-size:10px!important;
+}
+@media(max-width:490px){
+  #agent-controls .retention-mode button{padding:6px 10px;}
+}
