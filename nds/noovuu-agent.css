@@ -42,3 +42,32 @@ body.agent-sidebar-open #cards.layout{grid-template-columns:repeat(2,minmax(0,1f
 #noovuu-agent.agent-builder-active #agent-chat{display:none}
 #noovuu-agent.agent-builder-active #agent-builder-host{display:block;flex:1 1 auto;min-height:0;padding:0 14px 18px;overflow-y:auto;scrollbar-width:thin}
 #noovuu-agent.agent-builder-active #agent-controls{max-height:min(32dvh,390px)}
+
+/* Inline seven-step builder: non-modal region with independent scrolling. */
+#noovuu-agent #onboarding{display:block!important;box-sizing:border-box;position:relative!important;inset:auto!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;width:100%!important;height:auto!important;min-width:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0 0 16px!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;transform:none!important;transition:none!important;visibility:visible!important;pointer-events:auto!important}
+#noovuu-agent #onboarding[aria-hidden=true]{display:none!important}
+#noovuu-agent #onboarding[aria-hidden=false]{display:block!important}
+#noovuu-agent #onboarding .wz-top{display:none!important}
+#noovuu-agent #onboarding .noovuu-drawer-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:8px;padding:13px 0;margin:0 0 14px;border-bottom:1px solid #e8eaed;background:white}
+#noovuu-agent #onboarding .noovuu-drawer-head small{font-size:9px;color:#80868b}
+#noovuu-agent #onboarding .noovuu-drawer-head strong{font-size:16px;font-weight:600;line-height:1.35}
+#noovuu-agent #onboarding .drawer-head-actions{display:flex;align-items:center;gap:5px}
+#noovuu-agent #onboarding .drawer-cancel{padding:9px 10px!important;font-size:11px!important;border-radius:9px}
+#noovuu-agent #noovuu-close{flex:0 0 34px;width:34px!important;height:34px!important;padding:0;font-size:20px}
+#noovuu-agent #noovuu-unsaved{display:block;font-size:10px;white-space:normal}
+#noovuu-agent #onboarding .wz-card{box-sizing:border-box;width:100%;min-width:0;padding:20px 16px;border:1px solid #dadce0;border-radius:14px;box-shadow:none;background:#fff}
+#noovuu-agent #onboarding .wz-eyebrow{font-size:10px;letter-spacing:1px;font-weight:600}
+#noovuu-agent #onboarding .wz-progress{margin:12px 0 18px}
+#noovuu-agent #onboarding .wz-card h1{font-size:22px;line-height:1.25;margin:7px 0 12px;font-weight:600}
+#noovuu-agent #onboarding .wz-intro{font-size:12px;line-height:1.6;margin:0 0 22px}
+#noovuu-agent #onboarding .wz-grid,#noovuu-agent #onboarding .wz-summary{display:grid;grid-template-columns:1fr!important;gap:17px}
+#noovuu-agent #onboarding .wz-field.wide{grid-column:1!important}
+#noovuu-agent #onboarding .wz-field label{font-size:12px;font-weight:500}
+#noovuu-agent #onboarding .wz-field input,#noovuu-agent #onboarding .wz-field select,#noovuu-agent #onboarding .wz-field textarea{width:100%;min-width:0;min-height:44px;padding:11px 12px;font-size:13px}
+#noovuu-agent #onboarding .wz-help{font-size:11px;line-height:1.55}
+#noovuu-agent #onboarding .fixed-edit-card{padding:13px 12px;margin-top:12px;background:#f8f9fa}
+#noovuu-agent #onboarding .fixed-entry{display:grid;grid-template-columns:1fr!important;gap:8px}
+#noovuu-agent #onboarding .fixed-entry input{min-width:0;width:100%}
+#noovuu-agent #onboarding .wz-actions{margin:22px 0 0;gap:9px}
+#noovuu-agent #onboarding .wz-btn{padding:11px 15px;min-height:43px;font-size:12px;border-radius:999px}
+#noovuu-agent #onboarding .wz-disclaimer{margin:16px 6px 0;font-size:10px;line-height:1.5;color:#80868b}
